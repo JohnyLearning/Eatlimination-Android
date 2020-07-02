@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Eatlimination</string>
+    <string name="add_foods_text">Add foods so that you can start your elimination diet.</string>
 </resources>
