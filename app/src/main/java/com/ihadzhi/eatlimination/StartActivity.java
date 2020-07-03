@@ -13,15 +13,15 @@ public class StartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-        setupHome();
+//        setupHome();
     }
 
-    private void setupHome() {
-        Fragment homeFragment = HomeFragment.newInstance();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .add(R.id.content_frame, homeFragment, homeFragment.getClass().getCanonicalName())
-                .addToBackStack(homeFragment.getClass().getCanonicalName())
-                .commit();
-    }
+//    private void setupHome() {
+//        Fragment homeFragment = HomeFragment.newInstance();
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        fragmentManager.beginTransaction()
+//                .add(R.id.content_frame, homeFragment, homeFragment.getClass().getCanonicalName())
+//                .addToBackStack(homeFragment.getClass().getCanonicalName())
+//                .commit();
+//    }
 }
