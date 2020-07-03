@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.ihadzhi.eatlimination.databinding.FragmentHomeBinding;
 
@@ -40,12 +41,21 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         dataBinding.addFoodAction.setOnClickListener(button -> {
-            Toast.makeText(getActivity(), "CLicked", Toast.LENGTH_SHORT).show();
+            addFoodsAction();
         });
     }
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    private void addFoodsAction() {
+        Fragment foodSearchFragment = FoodSearchFragment.newInstance();
+        FragmentManager fragmentManager = getParentFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.content_frame, foodSearchFragment, foodSearchFragment.getClass().getCanonicalName())
+                .addToBackStack(foodSearchFragment.getClass().getCanonicalName())
+                .commit();
     }
 }
