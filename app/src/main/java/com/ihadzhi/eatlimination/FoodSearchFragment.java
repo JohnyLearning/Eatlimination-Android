@@ -17,24 +17,19 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.lifecycle.ViewModelStore;
 import androidx.lifecycle.ViewModelStoreOwner;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.ihadzhi.eatlimination.databinding.FragmentFoodSearchBinding;
 import com.ihadzhi.eatlimination.databinding.FragmentHomeBinding;
+import com.ihadzhi.eatlimination.network.model.SpoonFoodAuto;
 import com.ihadzhi.eatlimination.viewmodel.SearchFoodsViewModel;
 
 public class FoodSearchFragment extends Fragment {
 
     private FragmentFoodSearchBinding dataBinding;
     private SearchFoodsViewModel searchFoodsViewModel;
-
-    public static FoodSearchFragment newInstance() {
-
-        Bundle args = new Bundle();
-
-        FoodSearchFragment fragment = new FoodSearchFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private FoodSearchAdapter foodSearchAdapter;
 
     @Nullable
     @Override
@@ -56,7 +51,14 @@ public class FoodSearchFragment extends Fragment {
 
               @Override
               public boolean onQueryTextSubmit(String query) {
-                  searchFoodsViewModel.searchFoods(query);
+                  searchFoodsViewModel.findFoods(query)
+                          .observe(getActivity(), foods -> {
+                              if (foods != null && foods.size() > 0) {
+                                  foodSearchAdapter.setFoods(foods);
+                              } else {
+
+                              }
+                          });
                   return true;
               }
 
@@ -66,5 +68,9 @@ public class FoodSearchFragment extends Fragment {
               }
 
           });
+        foodSearchAdapter = new FoodSearchAdapter(getActivity());
+        dataBinding.foodList.setAdapter(foodSearchAdapter);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
+        dataBinding.foodList.setLayoutManager(layoutManager);
     }
 }

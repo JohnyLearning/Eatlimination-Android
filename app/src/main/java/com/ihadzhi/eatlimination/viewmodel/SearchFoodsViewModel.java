@@ -12,7 +12,6 @@ import com.ihadzhi.eatlimination.network.model.SpoonFoodAuto;
 
 import java.util.List;
 
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -27,17 +26,23 @@ public class SearchFoodsViewModel extends AndroidViewModel {
         spoonacularService = new SpoonacularService();
     }
 
-    public void searchFoods(CharSequence searchFoodsQuery) {
+    public LiveData<List<SpoonFoodAuto>> findFoods(CharSequence searchFoodsQuery) {
         if (foundFoods == null) {
             foundFoods = new MutableLiveData<>();
-            spoonacularService.searchFoods(searchFoodsQuery)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(foundFoodsFromResponse ->
-                        foundFoods.setValue(foundFoodsFromResponse),
-                            throwable -> {
-                                // TODO: handle error
-                            });
+            searchFoods(searchFoodsQuery);
         }
+        return foundFoods;
+    }
+
+    private void searchFoods(CharSequence searchFoodsQuery) {
+        foundFoods = new MutableLiveData<>();
+        spoonacularService.searchFoods(searchFoodsQuery)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(foundFoodsFromResponse ->
+                    foundFoods.setValue(foundFoodsFromResponse),
+                        throwable -> {
+                            // TODO: handle error
+                        });
     }
 }

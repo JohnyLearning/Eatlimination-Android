@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="food"
+            type="com.ihadzhi.eatlimination.network.model.SpoonFoodAuto" />
+    </data>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:padding="6dp"
+            android:layout_gravity="center"
+            tools:src="@drawable/ic_add_food_button"/>
+
+        <TextView
+            android:layout_marginStart="12dp"
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:text="@{food.name}"
+            android:layout_height="wrap_content"
+            tools:text="Food name"/>
+
+    </LinearLayout>
+</layout>

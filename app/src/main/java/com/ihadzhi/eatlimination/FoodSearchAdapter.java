@@ -4,19 +4,19 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ihadzhi.eatlimination.databinding.FragmentFoodSearchBinding;
+import com.ihadzhi.eatlimination.databinding.SearchFoodItemBinding;
+import com.ihadzhi.eatlimination.network.model.SpoonFoodAuto;
 
 import java.util.List;
 
-public class FoodSearchAdapter extends RecyclerView.Adapter<FoodSearchAdapter.FoodSearchViewHolder> {
+class FoodSearchAdapter extends RecyclerView.Adapter<FoodSearchAdapter.FoodSearchViewHolder> {
 
     private final Context context;
-//    private List<Food> reviews;
+    private List<SpoonFoodAuto> foods;
 
     public FoodSearchAdapter(Context context) {
         this.context = context;
@@ -26,27 +26,40 @@ public class FoodSearchAdapter extends RecyclerView.Adapter<FoodSearchAdapter.Fo
     @Override
     public FoodSearchViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        FragmentFoodSearchBinding binding = FragmentFoodSearchBinding.inflate(layoutInflater, parent, false);
-        return new FoodSearchViewHolder(parent, binding);
+        SearchFoodItemBinding binding = SearchFoodItemBinding.inflate(layoutInflater, parent, false);
+        return new FoodSearchViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull FoodSearchViewHolder holder, int position) {
+        SpoonFoodAuto food = foods.get(position);
+        holder.bind(food);
+    }
 
+    public void setFoods(List<SpoonFoodAuto> foods) {
+        this.foods = foods;
+        notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return foods != null ? foods.size() : 0;
     }
 
     class FoodSearchViewHolder extends RecyclerView.ViewHolder {
 
-        FragmentFoodSearchBinding binding;
+        SearchFoodItemBinding binding;
 
-        public FoodSearchViewHolder(@NonNull View itemView, FragmentFoodSearchBinding binding) {
+        public FoodSearchViewHolder(SearchFoodItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+        }
+
+        void bind(SpoonFoodAuto food) {
+            binding.setFood(food);
+//            binding.closeAction.setOnClickListener(view -> {
+//                dialog.dismiss();
+//            });
         }
     }
 }

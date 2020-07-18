@@ -12,9 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.navigation.ActionOnlyNavDirections;
-import androidx.navigation.NavDirections;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.ihadzhi.eatlimination.databinding.FragmentHomeBinding;
@@ -22,15 +19,6 @@ import com.ihadzhi.eatlimination.databinding.FragmentHomeBinding;
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding dataBinding;
-
-    public static HomeFragment newInstance() {
-
-        Bundle args = new Bundle();
-
-        HomeFragment fragment = new HomeFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Nullable
     @Override
