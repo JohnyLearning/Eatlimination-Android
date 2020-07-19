@@ -10,16 +10,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ihadzhi.eatlimination.databinding.SearchFoodItemBinding;
 import com.ihadzhi.eatlimination.network.model.SpoonFoodAuto;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 class FoodSearchAdapter extends RecyclerView.Adapter<FoodSearchAdapter.FoodSearchViewHolder> {
 
+    @FunctionalInterface
+    public interface FoodClickListener {
+        void execute(SpoonFoodAuto food);
+    }
+
     private final Context context;
     private List<SpoonFoodAuto> foods;
+    private FoodClickListener foodClickListener;
 
-    public FoodSearchAdapter(Context context) {
+    public FoodSearchAdapter(Context context, FoodClickListener foodClickListener) {
         this.context = context;
+        this.foodClickListener = foodClickListener;
     }
 
     @NonNull
@@ -46,7 +54,7 @@ class FoodSearchAdapter extends RecyclerView.Adapter<FoodSearchAdapter.FoodSearc
         return foods != null ? foods.size() : 0;
     }
 
-    class FoodSearchViewHolder extends RecyclerView.ViewHolder {
+    class FoodSearchViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         SearchFoodItemBinding binding;
 
@@ -57,9 +65,18 @@ class FoodSearchAdapter extends RecyclerView.Adapter<FoodSearchAdapter.FoodSearc
 
         void bind(SpoonFoodAuto food) {
             binding.setFood(food);
-//            binding.closeAction.setOnClickListener(view -> {
-//                dialog.dismiss();
-//            });
+            Picasso.get()
+                    .load("https://spoonacular.com/cdn/ingredients_100x100/" + food.getImage())
+                    .into(binding.foodImage);
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            if (foodClickListener != null && foods != null && foods.size() > 0) {
+                foodClickListener.execute(foods.get(getAdapterPosition()));
+            }
+        }
+
     }
 }

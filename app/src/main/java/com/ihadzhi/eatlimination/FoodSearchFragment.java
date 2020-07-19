@@ -68,7 +68,9 @@ public class FoodSearchFragment extends Fragment {
               }
 
           });
-        foodSearchAdapter = new FoodSearchAdapter(getActivity());
+        foodSearchAdapter = new FoodSearchAdapter(getActivity(), food -> {
+
+        });
         dataBinding.foodList.setAdapter(foodSearchAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
         dataBinding.foodList.setLayoutManager(layoutManager);
