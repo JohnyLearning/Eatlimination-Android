@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/eatlimination_nav_graph"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/eatlimination_nav_graph"
     app:startDestination="@id/homeFragment">
 
     <fragment
@@ -18,5 +20,21 @@
     <fragment
         android:id="@+id/foodSearchFragment"
         android:name="com.ihadzhi.eatlimination.FoodSearchFragment"
-        android:label="FoodSearchFragment" />
+        android:label="FoodSearchFragment" >
+        <action
+            android:id="@+id/action_foodSearchFragment_to_addFoodFragment"
+            app:destination="@id/addFoodFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addFoodFragment"
+        android:name="com.ihadzhi.eatlimination.AddFoodFragment"
+        android:label="fragment_add_food"
+        tools:layout="@layout/fragment_add_food">
+
+        <argument android:name="food" app:argType="com.ihadzhi.eatlimination.network.model.SpoonFoodAuto"/>
+        <action
+            android:id="@+id/action_addFoodFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+
+    </fragment>
 </navigation>
