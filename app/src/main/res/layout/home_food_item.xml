@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="food"
+            type="com.ihadzhi.eatlimination.data.Food" />
+    </data>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="24dp">
+
+        <ImageView
+            android:id="@+id/food_image"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_gravity="center"
+            tools:src="@drawable/ic_add_food_button"/>
+
+        <TextView
+            android:layout_marginStart="12dp"
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:fontFamily="sans-serif-black"
+            android:textStyle="italic"
+            android:textSize="16sp"
+            android:text="@{food.title}"
+            android:layout_height="wrap_content"
+            tools:text="Food name"/>
+
+    </LinearLayout>
+</layout>

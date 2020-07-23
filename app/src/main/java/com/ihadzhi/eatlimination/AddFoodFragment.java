@@ -2,8 +2,6 @@ package com.ihadzhi.eatlimination;
 
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
@@ -51,8 +49,7 @@ public class AddFoodFragment extends Fragment {
         // add to room
         FoodDao foodDao = EatliminationDatabase.getInstance(getActivity()).foodDao();
         DietDao dietDao = EatliminationDatabase.getInstance(getActivity()).dietDao();
-        executor.execute(() -> {
-            Diet activeDiet = dietDao.fetchActiveDiet();
+        dietDao.fetchActiveDiet().observe(getActivity(), activeDiet -> {
             long dietId = -1;
             if (activeDiet == null) {
                 activeDiet = new Diet(true, new Date());

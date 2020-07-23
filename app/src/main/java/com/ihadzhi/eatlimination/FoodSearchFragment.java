@@ -44,6 +44,7 @@ public class FoodSearchFragment extends Fragment {
 
               @Override
               public boolean onQueryTextSubmit(String query) {
+                  searchFoodsViewModel.findFoods(query).removeObservers(getActivity());
                   searchFoodsViewModel.findFoods(query)
                           .observe(getActivity(), foods -> {
                               if (foods != null && foods.size() > 0) {

@@ -13,7 +13,7 @@ import java.util.List;
 public interface DietDao {
 
     @Query("SELECT * FROM Diet WHERE active = 1 ORDER BY createdAt DESC LIMIT 1")
-    Diet fetchActiveDiet();
+    LiveData<Diet> fetchActiveDiet();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insert(Diet diet);
