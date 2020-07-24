@@ -36,7 +36,6 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding dataBinding;
     private HomeViewModel homeViewModel;
     private HomeFoodAdapter homeFoodAdapter;
-    private ActionBar actionBar;
 
     @Nullable
     @Override
@@ -47,7 +46,6 @@ public class HomeFragment extends Fragment {
         homeFoodAdapter = new HomeFoodAdapter(getActivity(), food -> {
             // TODO: define action for food selection
         });
-        actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
         setHasOptionsMenu(true);
         return dataBinding.getRoot();
     }
@@ -58,6 +56,8 @@ public class HomeFragment extends Fragment {
         homeViewModel.getActiveDiet().observe(getActivity(), activeDiet -> {
             if (activeDiet != null) {
                 homeViewModel.getFoods(activeDiet.getId()).observe(getActivity(), foods -> setupFoodListContent(foods));
+            } else {
+                setupNoFoodsUi();
             }
         });
     }
@@ -71,8 +71,11 @@ public class HomeFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.add_food_action){
+        if (id == R.id.add_food_action) {
             addFoodsAction();
+            return true;
+        } else if (id == R.id.diet_action) {
+            dietAction();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -92,12 +95,20 @@ public class HomeFragment extends Fragment {
             dataBinding.foodsList.setLayoutManager(layoutManager);
             dataBinding.foodsList.setAdapter(homeFoodAdapter);
         } else {
-            dataBinding.foodsList.setVisibility(GONE);
-            dataBinding.noFoodsContent.setVisibility(VISIBLE);
-            dataBinding.addFoodAction.setVisibility(VISIBLE);
-            dataBinding.addFoodAction.setOnClickListener(button -> {
-                addFoodsAction();
-            });
+            setupNoFoodsUi();
         }
+    }
+
+    private void setupNoFoodsUi() {
+        dataBinding.foodsList.setVisibility(GONE);
+        dataBinding.noFoodsContent.setVisibility(VISIBLE);
+        dataBinding.addFoodAction.setVisibility(VISIBLE);
+        dataBinding.addFoodAction.setOnClickListener(button -> {
+            addFoodsAction();
+        });
+    }
+
+    private void dietAction() {
+        NavHostFragment.findNavController(this).navigate(HomeFragmentDirections.actionHomeFragmentToDietDetailsFragment());
     }
 }

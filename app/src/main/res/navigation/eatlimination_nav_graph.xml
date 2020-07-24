@@ -16,6 +16,9 @@
             app:exitAnim="@anim/fragment_fade_exit"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_homeFragment_to_dietDetailsFragment"
+            app:destination="@id/dietDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/foodSearchFragment"
@@ -37,4 +40,9 @@
             app:destination="@id/homeFragment" />
 
     </fragment>
+    <fragment
+        android:id="@+id/dietDetailsFragment"
+        android:name="com.ihadzhi.eatlimination.DietDetailsFragment"
+        android:label="diet_details_fragment"
+        tools:layout="@layout/diet_details_fragment" />
 </navigation>

@@ -2,11 +2,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" >
+    <group android:id="@+id/foods_available">
 
-    <item
-        android:id="@+id/add_food_action"
-        android:orderInCategory="10"
-        android:icon="@drawable/ic_add_food_button"
-        android:title="@string/add_food_button_title"
-        app:showAsAction="ifRoom" />
+        <item
+            android:id="@+id/diet_action"
+            android:orderInCategory="10"
+            android:icon="@drawable/ic_diet2"
+            android:title="@string/add_food_button_title"
+            app:showAsAction="ifRoom" />
+
+        <item
+            android:id="@+id/add_food_action"
+            android:orderInCategory="20"
+            android:icon="@drawable/ic_add_food_button"
+            android:title="@string/diet_button_title"
+            app:showAsAction="ifRoom" />
+
+    </group>
 </menu>
