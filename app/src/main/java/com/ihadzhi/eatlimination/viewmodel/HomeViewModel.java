@@ -41,10 +41,10 @@ public class HomeViewModel extends AndroidViewModel {
     }
 
     @Nullable
-    public LiveData<List<Food>> getFoods(long activeDietId) {
+    public LiveData<List<Food>> getFoods() {
         if (foods == null) {
             foods = new MutableLiveData<>();
-            foods = db.foodDao().fetchByDietId(activeDietId);
+            foods = db.foodDao().getAll();
         }
         return foods;
     }

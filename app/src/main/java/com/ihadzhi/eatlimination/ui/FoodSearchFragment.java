@@ -1,7 +1,8 @@
-package com.ihadzhi.eatlimination;
+package com.ihadzhi.eatlimination.ui;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
@@ -9,16 +10,15 @@ import android.widget.SearchView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import com.ihadzhi.eatlimination.R;
 import com.ihadzhi.eatlimination.databinding.FragmentFoodSearchBinding;
 import com.ihadzhi.eatlimination.viewmodel.SearchFoodsViewModel;
 
-public class FoodSearchFragment extends Fragment {
+public class FoodSearchFragment extends BaseFragment {
 
     private FragmentFoodSearchBinding dataBinding;
     private SearchFoodsViewModel searchFoodsViewModel;
@@ -37,36 +37,46 @@ public class FoodSearchFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        showBackButton();
         dataBinding.searchView.setFocusable(true);
         dataBinding.searchView.setIconified(false);
         dataBinding.searchView.requestFocus();
         dataBinding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
-              @Override
-              public boolean onQueryTextSubmit(String query) {
-                  searchFoodsViewModel.findFoods(query).removeObservers(getActivity());
-                  searchFoodsViewModel.findFoods(query)
-                          .observe(getActivity(), foods -> {
-                              if (foods != null && foods.size() > 0) {
-                                  foodSearchAdapter.setFoods(foods);
-                              } else {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                searchFoodsViewModel.findFoods(query).removeObservers(getActivity());
+                searchFoodsViewModel.findFoods(query)
+                        .observe(getActivity(), foods -> {
+                            if (foods != null && foods.size() > 0) {
+                                foodSearchAdapter.setFoods(foods);
+                            } else {
 
-                              }
-                          });
-                  return true;
-              }
+                            }
+                        });
+                return true;
+            }
 
-              @Override
-              public boolean onQueryTextChange(String newText) {
-                  return false;
-              }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
 
-          });
+        });
         foodSearchAdapter = new FoodSearchAdapter(getActivity(), food -> {
             NavHostFragment.findNavController(this).navigate(FoodSearchFragmentDirections.actionFoodSearchFragmentToAddFoodFragment(food));
         });
         dataBinding.foodList.setAdapter(foodSearchAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
         dataBinding.foodList.setLayoutManager(layoutManager);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            NavHostFragment.findNavController(this).navigate(FoodSearchFragmentDirections.popToFoodSearchFragmentToHomeFragment());
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

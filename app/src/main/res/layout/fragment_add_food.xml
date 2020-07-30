@@ -14,7 +14,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".AddFoodFragment">
+        tools:context=".ui.AddFoodFragment">
 
         <ImageView
             android:id="@+id/food_image"

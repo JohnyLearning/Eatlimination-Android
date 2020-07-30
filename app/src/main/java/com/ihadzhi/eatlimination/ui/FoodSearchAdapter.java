@@ -1,4 +1,4 @@
-package com.ihadzhi.eatlimination;
+package com.ihadzhi.eatlimination.ui;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,43 +8,43 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ihadzhi.eatlimination.data.Food;
-import com.ihadzhi.eatlimination.databinding.HomeFoodItemBinding;
+import com.ihadzhi.eatlimination.databinding.SearchFoodItemBinding;
+import com.ihadzhi.eatlimination.network.model.SpoonFoodAuto;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-class HomeFoodAdapter extends RecyclerView.Adapter<HomeFoodAdapter.HomeFoodViewHolder> {
+class FoodSearchAdapter extends RecyclerView.Adapter<FoodSearchAdapter.FoodSearchViewHolder> {
 
     @FunctionalInterface
     public interface FoodClickListener {
-        void execute(Food food);
+        void execute(SpoonFoodAuto food);
     }
 
     private final Context context;
-    private List<Food> foods;
+    private List<SpoonFoodAuto> foods;
     private FoodClickListener foodClickListener;
 
-    public HomeFoodAdapter(Context context, FoodClickListener foodClickListener) {
+    public FoodSearchAdapter(Context context, FoodClickListener foodClickListener) {
         this.context = context;
         this.foodClickListener = foodClickListener;
     }
 
     @NonNull
     @Override
-    public HomeFoodViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public FoodSearchViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        HomeFoodItemBinding binding = HomeFoodItemBinding.inflate(layoutInflater, parent, false);
-        return new HomeFoodViewHolder(binding);
+        SearchFoodItemBinding binding = SearchFoodItemBinding.inflate(layoutInflater, parent, false);
+        return new FoodSearchViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HomeFoodViewHolder holder, int position) {
-        Food food = foods.get(position);
+    public void onBindViewHolder(@NonNull FoodSearchViewHolder holder, int position) {
+        SpoonFoodAuto food = foods.get(position);
         holder.bind(food);
     }
 
-    public void setFoods(List<Food> foods) {
+    public void setFoods(List<SpoonFoodAuto> foods) {
         this.foods = foods;
         notifyDataSetChanged();
     }
@@ -54,19 +54,19 @@ class HomeFoodAdapter extends RecyclerView.Adapter<HomeFoodAdapter.HomeFoodViewH
         return foods != null ? foods.size() : 0;
     }
 
-    class HomeFoodViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class FoodSearchViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        HomeFoodItemBinding binding;
+        SearchFoodItemBinding binding;
 
-        public HomeFoodViewHolder(HomeFoodItemBinding binding) {
+        public FoodSearchViewHolder(SearchFoodItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
 
-        void bind(Food food) {
+        void bind(SpoonFoodAuto food) {
             binding.setFood(food);
             Picasso.get()
-                    .load("https://spoonacular.com/cdn/ingredients_100x100/" + food.getImageUrl())
+                    .load("https://spoonacular.com/cdn/ingredients_100x100/" + food.getImage())
                     .into(binding.foodImage);
             itemView.setOnClickListener(this);
         }

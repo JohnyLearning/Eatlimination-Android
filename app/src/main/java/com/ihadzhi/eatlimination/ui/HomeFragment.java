@@ -1,4 +1,4 @@
-package com.ihadzhi.eatlimination;
+package com.ihadzhi.eatlimination.ui;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,16 +10,13 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ihadzhi.eatlimination.R;
 import com.ihadzhi.eatlimination.data.Food;
 import com.ihadzhi.eatlimination.databinding.FragmentHomeBinding;
 import com.ihadzhi.eatlimination.viewmodel.HomeViewModel;
@@ -31,7 +28,7 @@ import java.util.List;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends BaseFragment {
 
     private FragmentHomeBinding dataBinding;
     private HomeViewModel homeViewModel;
@@ -53,9 +50,18 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        homeViewModel.getActiveDiet().observe(getActivity(), activeDiet -> {
-            if (activeDiet != null) {
-                homeViewModel.getFoods(activeDiet.getId()).observe(getActivity(), foods -> setupFoodListContent(foods));
+        hideBackButton();
+        hideNavigation();
+//        homeViewModel.getActiveDiet().observe(getActivity(), activeDiet -> {
+//            if (activeDiet != null) {
+//                homeViewModel.getFoods(activeDiet.getId()).observe(getActivity(), foods -> setupFoodListContent(foods));
+//            } else {
+//                setupNoFoodsUi();
+//            }
+//        });
+        homeViewModel.getFoods().observe(getActivity(), foods -> {
+            if (foods != null && foods.size() > 0) {
+                setupFoodListContent(foods);
             } else {
                 setupNoFoodsUi();
             }

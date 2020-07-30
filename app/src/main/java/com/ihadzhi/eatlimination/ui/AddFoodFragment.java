@@ -1,4 +1,4 @@
-package com.ihadzhi.eatlimination;
+package com.ihadzhi.eatlimination.ui;
 
 import android.os.Bundle;
 
@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ihadzhi.eatlimination.R;
 import com.ihadzhi.eatlimination.data.Diet;
 import com.ihadzhi.eatlimination.data.DietDao;
 import com.ihadzhi.eatlimination.data.EatliminationDatabase;
