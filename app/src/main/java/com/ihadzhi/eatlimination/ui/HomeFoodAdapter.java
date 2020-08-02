@@ -6,13 +6,22 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ihadzhi.eatlimination.R;
+import com.ihadzhi.eatlimination.data.Diet;
+import com.ihadzhi.eatlimination.data.DietDao;
+import com.ihadzhi.eatlimination.data.EatliminationDatabase;
 import com.ihadzhi.eatlimination.data.Food;
+import com.ihadzhi.eatlimination.data.FoodDao;
 import com.ihadzhi.eatlimination.databinding.HomeFoodItemBinding;
 import com.squareup.picasso.Picasso;
 
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 class HomeFoodAdapter extends RecyclerView.Adapter<HomeFoodAdapter.HomeFoodViewHolder> {
 
@@ -24,10 +33,14 @@ class HomeFoodAdapter extends RecyclerView.Adapter<HomeFoodAdapter.HomeFoodViewH
     private final Context context;
     private List<Food> foods;
     private FoodClickListener foodClickListener;
+    private FoodDao foodDao;
+    private DietDao dietDao;
 
     public HomeFoodAdapter(Context context, FoodClickListener foodClickListener) {
         this.context = context;
         this.foodClickListener = foodClickListener;
+        foodDao = EatliminationDatabase.getInstance(context).foodDao();
+        dietDao = EatliminationDatabase.getInstance(context).dietDao();
     }
 
     @NonNull
@@ -57,6 +70,7 @@ class HomeFoodAdapter extends RecyclerView.Adapter<HomeFoodAdapter.HomeFoodViewH
     class HomeFoodViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         HomeFoodItemBinding binding;
+        private Executor executor;
 
         public HomeFoodViewHolder(HomeFoodItemBinding binding) {
             super(binding.getRoot());
@@ -69,6 +83,14 @@ class HomeFoodAdapter extends RecyclerView.Adapter<HomeFoodAdapter.HomeFoodViewH
                     .load("https://spoonacular.com/cdn/ingredients_100x100/" + food.getImageUrl())
                     .into(binding.foodImage);
             itemView.setOnClickListener(this);
+            if (food.getDietId() >= 0) {
+                binding.addToDiet.setVisibility(View.GONE);
+            } else {
+                binding.addToDiet.setVisibility(View.VISIBLE);
+                binding.addToDiet.setOnClickListener(view -> {
+                    addToDiet(food);
+                });
+            }
         }
 
         @Override
@@ -76,6 +98,23 @@ class HomeFoodAdapter extends RecyclerView.Adapter<HomeFoodAdapter.HomeFoodViewH
             if (foodClickListener != null && foods != null && foods.size() > 0) {
                 foodClickListener.execute(foods.get(getAdapterPosition()));
             }
+        }
+
+        private void addToDiet(Food food) {
+            dietDao.fetchActiveDiet().observe((LifecycleOwner) context, activeDiet -> {
+                executor = Executors.newFixedThreadPool(1);
+                if (activeDiet == null) {
+                    executor.execute(() -> {
+                        long dietId = dietDao.insert(new Diet(true, new Date()));
+                        foodDao.updateFoodDiet(food.getId(), dietId);
+                    });
+                } else {
+                    executor.execute(() -> {
+                        foodDao.updateFoodDiet(food.getId(), activeDiet.getId());
+                    });
+                }
+                binding.addToDiet.setVisibility(View.GONE);
+            });
         }
 
     }

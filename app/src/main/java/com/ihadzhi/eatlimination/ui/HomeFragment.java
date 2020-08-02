@@ -52,13 +52,6 @@ public class HomeFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         hideBackButton();
         hideNavigation();
-//        homeViewModel.getActiveDiet().observe(getActivity(), activeDiet -> {
-//            if (activeDiet != null) {
-//                homeViewModel.getFoods(activeDiet.getId()).observe(getActivity(), foods -> setupFoodListContent(foods));
-//            } else {
-//                setupNoFoodsUi();
-//            }
-//        });
         homeViewModel.getFoods().observe(getActivity(), foods -> {
             if (foods != null && foods.size() > 0) {
                 setupFoodListContent(foods);
