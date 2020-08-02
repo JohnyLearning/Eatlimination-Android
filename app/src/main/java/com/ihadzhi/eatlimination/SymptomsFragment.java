@@ -1,4 +1,4 @@
-package com.ihadzhi.eatlimination.ui;
+package com.ihadzhi.eatlimination;
 
 import androidx.lifecycle.ViewModelProviders;
 
@@ -12,25 +12,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.ihadzhi.eatlimination.R;
-import com.ihadzhi.eatlimination.viewmodel.DietDetailsViewModel;
+public class SymptomsFragment extends Fragment {
 
-public class DietDetailsFragment extends BaseFragment {
+    private SymptomsViewModel mViewModel;
 
-    private DietDetailsViewModel mViewModel;
+    public static SymptomsFragment newInstance() {
+        return new SymptomsFragment();
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.diet_details_fragment, container, false);
+        return inflater.inflate(R.layout.symptoms_fragment, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        showBackButton();
-        showNavigation();
-        mViewModel = ViewModelProviders.of(this).get(DietDetailsViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(SymptomsViewModel.class);
         // TODO: Use the ViewModel
     }
 

@@ -115,6 +115,6 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void dietAction() {
-        NavHostFragment.findNavController(this).navigate(HomeFragmentDirections.actionHomeFragmentToDietDetailsFragment());
+        NavHostFragment.findNavController(this).navigate(HomeFragmentDirections.actionHomeFragmentToFoodsIncludedFragment());
     }
 }

@@ -17,9 +17,10 @@
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
-            android:id="@+id/action_homeFragment_to_dietDetailsFragment"
-            app:destination="@id/dietDetailsFragment" />
+            android:id="@+id/action_homeFragment_to_foodsIncludedFragment"
+            app:destination="@id/foodsIncludedFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/foodSearchFragment"
         android:name="com.ihadzhi.eatlimination.ui.FoodSearchFragment"
@@ -31,6 +32,7 @@
             android:id="@+id/popTo_foodSearchFragment_to_homeFragment"
             app:popUpTo="@id/homeFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/addFoodFragment"
         android:name="com.ihadzhi.eatlimination.ui.AddFoodFragment"
@@ -43,9 +45,16 @@
             app:destination="@id/homeFragment" />
 
     </fragment>
+
     <fragment
-        android:id="@+id/dietDetailsFragment"
-        android:name="com.ihadzhi.eatlimination.ui.DietDetailsFragment"
+        android:id="@+id/foodsIncludedFragment"
+        android:name="com.ihadzhi.eatlimination.ui.FoodsIncludedFragment"
         android:label="diet_details_fragment"
-        tools:layout="@layout/diet_details_fragment" />
+        tools:layout="@layout/foods_included_fragment" />
+
+    <fragment
+        android:id="@+id/symptomsFragment"
+        android:name="com.ihadzhi.eatlimination.SymptomsFragment"
+        android:label="symptoms_fragment"
+        tools:layout="@layout/symptoms_fragment" />
 </navigation>
