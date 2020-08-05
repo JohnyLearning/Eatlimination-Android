@@ -29,8 +29,10 @@
             android:id="@+id/action_foodSearchFragment_to_addFoodFragment"
             app:destination="@id/addFoodFragment" />
         <action
-            android:id="@+id/popTo_foodSearchFragment_to_homeFragment"
-            app:popUpTo="@id/homeFragment" />
+            android:id="@+id/action_foodSearchFragment_to_homeFragment2"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit" />
     </fragment>
 
     <fragment

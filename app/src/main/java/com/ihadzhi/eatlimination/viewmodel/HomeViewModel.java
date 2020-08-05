@@ -21,30 +21,21 @@ import java.util.concurrent.Executors;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-public class HomeViewModel extends AndroidViewModel {
+public class HomeViewModel extends BaseViewModel {
 
     private LiveData<List<Food>> foods;
     private LiveData<Diet> activeDiet;
     private Executor executor;
-    private EatliminationDatabase db;
 
     public HomeViewModel(@NonNull Application application) {
         super(application);
-        db = EatliminationDatabase.getInstance(getApplication().getApplicationContext());
-    }
-
-    public LiveData<Diet> getActiveDiet() {
-        if (activeDiet == null) {
-            activeDiet = db.dietDao().fetchActiveDiet();
-        }
-        return activeDiet;
     }
 
     @Nullable
     public LiveData<List<Food>> getFoods() {
         if (foods == null) {
             foods = new MutableLiveData<>();
-            foods = db.foodDao().getAll();
+            foods = database.foodDao().getAll();
         }
         return foods;
     }

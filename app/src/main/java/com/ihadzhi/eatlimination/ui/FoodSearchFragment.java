@@ -74,7 +74,7 @@ public class FoodSearchFragment extends BaseFragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            NavHostFragment.findNavController(this).navigate(FoodSearchFragmentDirections.popToFoodSearchFragmentToHomeFragment());
+            NavHostFragment.findNavController(this).navigate(FoodSearchFragmentDirections.actionFoodSearchFragmentToHomeFragment2());
             return true;
         }
         return super.onOptionsItemSelected(item);
