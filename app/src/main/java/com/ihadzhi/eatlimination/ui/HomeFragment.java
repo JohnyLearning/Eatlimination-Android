@@ -70,14 +70,15 @@ public class HomeFragment extends BaseFragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.add_food_action) {
-            addFoodsAction();
-            return true;
-        } else if (id == R.id.diet_action) {
-            dietAction();
-            return true;
+        switch (id) {
+            case R.id.add_food_action:
+                addFoodsAction();
+                break;
+            case R.id.diet_action:
+                dietAction();
+                break;
         }
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 
     private void addFoodsAction() {
@@ -108,6 +109,6 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void dietAction() {
-        NavHostFragment.findNavController(this).navigate(HomeFragmentDirections.actionHomeFragmentToFoodsIncludedFragment());
+        NavHostFragment.findNavController(this).navigate(HomeFragmentDirections.moveFromHomeFragmentToFoodsIncludedFragment());
     }
 }

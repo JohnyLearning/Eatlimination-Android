@@ -8,11 +8,14 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.navigation.NavDestination;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -36,19 +39,21 @@ public class FoodsIncludedFragment extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         dataBinding = DataBindingUtil.inflate(inflater, R.layout.foods_included_fragment, container, false);
-        foodsIncludedAdapter = new FoodsIncludedAdapter(getActivity(), food -> {
-            // TODO: define action for food selection
-        });
         setHasOptionsMenu(true);
-        foodsIncludedViewModel = ViewModelProviders.of(this).get(FoodsIncludedViewModel.class);
         return dataBinding.getRoot();
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        showBackButton();
-        showNavigation();
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        foodsIncludedAdapter = new FoodsIncludedAdapter(getActivity(), food -> {
+            // TODO: define action for food selection
+        });
+        int numberOfItemsPerRow = (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) ? 5 : 3;
+        LinearLayoutManager layoutManager = new GridLayoutManager(getActivity(), numberOfItemsPerRow);
+        dataBinding.foodsIncludedList.setLayoutManager(layoutManager);
+        dataBinding.foodsIncludedList.setAdapter(foodsIncludedAdapter);
+        foodsIncludedViewModel = ViewModelProviders.of(this).get(FoodsIncludedViewModel.class);
         foodsIncludedViewModel.getActiveDiet().observe(getActivity(), activeDiet -> {
             if (activeDiet != null) {
                 foodsIncludedViewModel.getFoods(activeDiet.getId()).observe(getActivity(), foods -> {
@@ -60,12 +65,23 @@ public class FoodsIncludedFragment extends BaseFragment {
         });
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        showBackButton();
+        showNavigation();
+    }
+
     private void setupFoodListContent(@NotNull List<Food> foods) {
         foodsIncludedAdapter.setFoods(foods);
-        int numberOfItemsPerRow = (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) ? 5 : 3;
-        LinearLayoutManager layoutManager = new GridLayoutManager(getActivity(), numberOfItemsPerRow);
-        dataBinding.foodsIncludedList.setLayoutManager(layoutManager);
-        dataBinding.foodsIncludedList.setAdapter(foodsIncludedAdapter);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            NavHostFragment.findNavController(this).navigate(FoodsIncludedFragmentDirections.backToHomeFragment());
+        }
+        return true;
     }
 
 }

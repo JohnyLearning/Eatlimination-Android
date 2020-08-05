@@ -13,27 +13,24 @@
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="24dp"
-        android:paddingRight="12dp"
-        android:paddingLeft="12dp"
-        android:paddingBottom="24dp">
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="24dp">
 
         <ImageView
             android:id="@+id/food_image"
             android:layout_width="65dp"
             android:layout_height="65dp"
-            android:layout_gravity="center"
             tools:src="@drawable/ic_add_food_button"/>
 
         <TextView
             android:id="@+id/food_name"
-            android:layout_marginStart="12dp"
             android:layout_width="wrap_content"
             android:fontFamily="sans-serif"
             android:textStyle="italic"
             android:textSize="12sp"
             android:textColor="@color/Black"
-            android:layout_gravity="center"
             android:layout_weight="1"
             android:text="@{food.title}"
             android:layout_height="wrap_content"
