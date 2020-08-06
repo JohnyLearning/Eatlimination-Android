@@ -17,7 +17,7 @@ public class Symptom {
 
     private String description;
 
-    public Symptom(@NonNull long id, String imageName, String name, String description) {
+    public Symptom(@NonNull long id, String name, String description, String imageName) {
         this.id = id;
         this.imageName = imageName;
         this.name = name;
