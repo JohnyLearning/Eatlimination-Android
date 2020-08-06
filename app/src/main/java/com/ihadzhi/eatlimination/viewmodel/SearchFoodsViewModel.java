@@ -15,7 +15,7 @@ import java.util.List;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-public class SearchFoodsViewModel extends AndroidViewModel {
+public class SearchFoodsViewModel extends BaseViewModel {
 
     private MutableLiveData<List<SpoonFoodAuto>> foundFoods;
     private SpoonacularService spoonacularService;

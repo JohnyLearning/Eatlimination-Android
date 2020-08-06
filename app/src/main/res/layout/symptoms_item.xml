@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="symptom"
+            type="com.ihadzhi.eatlimination.data.Symptom" />
+    </data>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="24dp">
+
+        <ImageView
+            android:id="@+id/symptom_image"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_gravity="center"
+            tools:src="@drawable/ic_add_food_button"/>
+
+        <TextView
+            android:layout_marginStart="12dp"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:fontFamily="sans-serif"
+            android:textStyle="italic"
+            android:textSize="20sp"
+            android:textColor="@color/Black"
+            android:layout_weight="1"
+            android:text="@{symptom.name}"
+            android:layout_height="wrap_content"
+            tools:text="Food name"/>
+        
+        <ImageView
+            android:id="@+id/symptom_recording_action"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
+            android:tint="@color/colorAccent"
+            android:src="@drawable/ic_add_to_diet" />
+
+    </LinearLayout>
+</layout>

@@ -58,7 +58,7 @@ public class FoodsIncludedFragment extends BaseFragment {
             if (activeDiet != null) {
                 foodsIncludedViewModel.getFoods(activeDiet.getId()).observe(getActivity(), foods -> {
                     if (foods != null && foods.size() > 0) {
-                        setupFoodListContent(foods);
+                        foodsIncludedAdapter.setFoods(foods);
                     }
                 });
             }
@@ -70,10 +70,6 @@ public class FoodsIncludedFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         showBackButton();
         showNavigation();
-    }
-
-    private void setupFoodListContent(@NotNull List<Food> foods) {
-        foodsIncludedAdapter.setFoods(foods);
     }
 
     @Override

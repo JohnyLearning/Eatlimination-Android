@@ -1,5 +1,6 @@
 package com.ihadzhi.eatlimination.data;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -11,15 +12,16 @@ public class Symptom {
     @NonNull
     private long id;
 
-    private String imageName;
+    @DrawableRes
+    private int imageResource;
 
     private String name;
 
     private String description;
 
-    public Symptom(@NonNull long id, String name, String description, String imageName) {
+    public Symptom(@NonNull long id, String name, String description, int imageResource) {
         this.id = id;
-        this.imageName = imageName;
+        this.imageResource = imageResource;
         this.name = name;
         this.description = description;
     }
@@ -29,8 +31,8 @@ public class Symptom {
         return id;
     }
 
-    public String getImageName() {
-        return imageName;
+    public @DrawableRes int getImageResource() {
+        return imageResource;
     }
 
     public String getName() {

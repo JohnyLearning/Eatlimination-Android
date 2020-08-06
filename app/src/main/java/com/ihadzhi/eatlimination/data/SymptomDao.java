@@ -12,6 +12,9 @@ import java.util.List;
 @Dao
 public interface SymptomDao {
 
+    @Query("SELECT * FROM symptom ORDER BY name")
+    LiveData<List<Symptom>> getAll();
+
     @Insert
     void insertAll(Symptom ... symptoms);
 

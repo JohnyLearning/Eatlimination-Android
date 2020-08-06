@@ -8,76 +8,76 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ihadzhi.eatlimination.R;
 import com.ihadzhi.eatlimination.data.Food;
+import com.ihadzhi.eatlimination.data.Symptom;
 import com.ihadzhi.eatlimination.databinding.FoodsIncludedItemBinding;
+import com.ihadzhi.eatlimination.databinding.SymptomsItemBinding;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 import java.util.concurrent.Executor;
 
-class SymptomsAdapter extends RecyclerView.Adapter<SymptomsAdapter.FoodsIncludedViewHolder> {
+class SymptomsAdapter extends RecyclerView.Adapter<SymptomsAdapter.SymptomsViewHolder> {
 
     @FunctionalInterface
-    public interface FoodClickListener {
-        void execute(Food food);
+    public interface SymptomClickListener {
+        void execute(Symptom symptom);
     }
 
     private final Context context;
-    private List<Food> foods;
-    private FoodClickListener foodClickListener;
+    private List<Symptom> symptoms;
+    private SymptomClickListener symptomClickListener;
 
-    public SymptomsAdapter(Context context, FoodClickListener foodClickListener) {
+    public SymptomsAdapter(Context context, SymptomClickListener symptomClickListener) {
         this.context = context;
-        this.foodClickListener = foodClickListener;
+        this.symptomClickListener = symptomClickListener;
     }
 
     @NonNull
     @Override
-    public FoodsIncludedViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public SymptomsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        FoodsIncludedItemBinding binding = FoodsIncludedItemBinding.inflate(layoutInflater, parent, false);
-        return new FoodsIncludedViewHolder(binding);
+        SymptomsItemBinding binding = SymptomsItemBinding.inflate(layoutInflater, parent, false);
+        return new SymptomsViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FoodsIncludedViewHolder holder, int position) {
-        Food food = foods.get(position);
-        holder.bind(food);
+    public void onBindViewHolder(@NonNull SymptomsViewHolder holder, int position) {
+        Symptom symptom = symptoms.get(position);
+        holder.bind(symptom);
     }
 
-    public void setFoods(List<Food> foods) {
-        this.foods = foods;
+    public void setSymptoms(List<Symptom> symptoms) {
+        this.symptoms = symptoms;
         notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return foods != null ? foods.size() : 0;
+        return symptoms != null ? symptoms.size() : 0;
     }
 
-    class FoodsIncludedViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class SymptomsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        FoodsIncludedItemBinding binding;
+        SymptomsItemBinding binding;
         private Executor executor;
 
-        public FoodsIncludedViewHolder(FoodsIncludedItemBinding binding) {
+        public SymptomsViewHolder(SymptomsItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
 
-        void bind(Food food) {
-            binding.setFood(food);
-            Picasso.get()
-                    .load("https://spoonacular.com/cdn/ingredients_100x100/" + food.getImageUrl())
-                    .into(binding.foodImage);
+        void bind(Symptom symptom) {
+            binding.setSymptom(symptom);
+            binding.symptomImage.setImageDrawable(context.getResources().getDrawable(symptom.getImageResource(), null));
             itemView.setOnClickListener(this);
-            binding.foodName.setText(food.getTitle());
         }
 
         @Override
         public void onClick(View v) {
-            if (foodClickListener != null && foods != null && foods.size() > 0) {
-                foodClickListener.execute(foods.get(getAdapterPosition()));
+            if (symptomClickListener != null && symptoms != null && symptoms.size() > 0) {
+                symptomClickListener.execute(symptoms.get(getAdapterPosition()));
             }
         }
 
