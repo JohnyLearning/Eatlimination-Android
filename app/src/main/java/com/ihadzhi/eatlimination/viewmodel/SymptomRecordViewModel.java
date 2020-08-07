@@ -7,16 +7,15 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.ihadzhi.eatlimination.data.Food;
 import com.ihadzhi.eatlimination.data.Symptom;
 
 import java.util.List;
 
-public class SymptomsViewModel extends BaseViewModel {
+public class SymptomRecordViewModel extends BaseViewModel {
 
     private LiveData<List<Symptom>> symptoms;
 
-    public SymptomsViewModel(@NonNull Application application) {
+    public SymptomRecordViewModel(@NonNull Application application) {
         super(application);
     }
 

@@ -44,7 +44,7 @@ public class SymptomsFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         symptomsViewModel = ViewModelProviders.of(this).get(SymptomsViewModel.class);
         symptomsAdapter = new SymptomsAdapter(getActivity(), symptoms -> {
-
+            NavHostFragment.findNavController(this).navigate(SymptomsFragmentDirections.actionSymptomsFragmentToSymptomRecordFragment());
         });
         symptomsViewModel.getSymptoms().observe(getActivity(), symptoms -> {
             symptomsAdapter.setSymptoms(symptoms);

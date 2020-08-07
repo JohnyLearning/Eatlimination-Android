@@ -70,11 +70,20 @@
         android:name="com.ihadzhi.eatlimination.ui.SymptomsFragment"
         tools:layout="@layout/symptoms_fragment">
 
-    <action
-        android:id="@+id/back_to_homeFragment"
-        app:destination="@id/homeFragment"
-        app:popUpTo="@id/homeFragment"
-        app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/back_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_symptomsFragment_to_symptomRecordFragment"
+            app:destination="@id/symptomRecordFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit" />
 
     </fragment>
+    <fragment
+        android:id="@+id/symptomRecordFragment"
+        android:name="com.ihadzhi.eatlimination.ui.SymptomRecordFragment"
+        android:label="SymptomRecordFragment" />
 </navigation>
