@@ -6,4 +6,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_food_button_title">Add food</string>
     <string name="diet_button_title">Diet</string>
+    <string name="recording_symptom_status_selection">Please select the status of this recording</string>
 </resources>
