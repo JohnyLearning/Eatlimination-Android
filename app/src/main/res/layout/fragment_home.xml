@@ -14,6 +14,7 @@
             android:layout_width="112dp"
             android:layout_height="112dp"
             android:background="@drawable/ic_add_food_button"
+            android:backgroundTintMode="screen"
             app:layout_constraintBottom_toTopOf="@id/no_foods_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

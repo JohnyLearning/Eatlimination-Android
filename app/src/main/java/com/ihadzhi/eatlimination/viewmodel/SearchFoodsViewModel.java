@@ -27,10 +27,10 @@ public class SearchFoodsViewModel extends BaseViewModel {
     }
 
     public LiveData<List<SpoonFoodAuto>> findFoods(CharSequence searchFoodsQuery) {
-        if (foundFoods == null) {
+//        if (foundFoods == null) {
             foundFoods = new MutableLiveData<>();
             searchFoods(searchFoodsQuery);
-        }
+//        }
         return foundFoods;
     }
 

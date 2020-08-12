@@ -45,10 +45,8 @@ public class FoodSearchFragment extends BaseFragment {
 
             @Override
             public boolean onQueryTextSubmit(String query) {
-                searchFoodsViewModel.findFoods(query).removeObservers(getActivity());
                 searchFoodsViewModel.findFoods(query)
-                        .observe(getActivity(), foods -> {
-                            if (foods != null && foods.size() > 0) {
+                        .observe(getActivity(), foods -> { if (foods != null && foods.size() > 0) {
                                 foodSearchAdapter.setFoods(foods);
                             } else {
 

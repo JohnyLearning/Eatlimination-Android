@@ -4,11 +4,13 @@
     <item
         android:id="@+id/foodsIncludedFragment"
         android:title="Foods included"
+        android:orderInCategory="10"
         android:icon="@drawable/ic_foods_included"/>
 
     <item
         android:id="@+id/symptomsFragment"
         android:title="Symptoms"
+        android:orderInCategory="20"
         android:icon="@drawable/ic_symptoms"/>
 
 </menu>

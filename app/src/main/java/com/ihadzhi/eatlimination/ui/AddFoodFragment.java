@@ -18,6 +18,7 @@ import com.ihadzhi.eatlimination.data.Food;
 import com.ihadzhi.eatlimination.data.FoodDao;
 import com.ihadzhi.eatlimination.databinding.FragmentAddFoodBinding;
 import com.ihadzhi.eatlimination.network.model.SpoonFoodAuto;
+import com.squareup.picasso.Picasso;
 
 import java.util.Date;
 import java.util.concurrent.Executor;
@@ -42,6 +43,9 @@ public class AddFoodFragment extends Fragment {
         binding.addFoodAction.setOnClickListener(view -> {
             addFoodAction();
         });
+        Picasso.get()
+                .load("https://spoonacular.com/cdn/ingredients_500x500/" + food.getImage())
+                .into(binding.foodImage);
         executor = Executors.newFixedThreadPool(1);
         return binding.getRoot();
     }

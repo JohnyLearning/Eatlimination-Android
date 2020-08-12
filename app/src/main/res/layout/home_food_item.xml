@@ -13,7 +13,9 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="24dp">
+        android:paddingBottom="24dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp">
 
         <ImageView
             android:id="@+id/food_image"
@@ -29,6 +31,7 @@
             android:fontFamily="sans-serif"
             android:textStyle="italic"
             android:textSize="20sp"
+            android:layout_gravity="center"
             android:textColor="@color/Black"
             android:layout_weight="1"
             android:text="@{food.title}"
@@ -39,7 +42,7 @@
             android:id="@+id/add_to_diet"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_gravity="center_vertical"
+            android:layout_gravity="center"
             android:tint="@color/colorAccent"
             android:src="@drawable/ic_add_to_diet" />
 
