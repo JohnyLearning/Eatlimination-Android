@@ -82,8 +82,8 @@
             app:enterAnim="@anim/fragment_open_enter"
             app:exitAnim="@anim/fragment_open_exit" />
         <action
-            android:id="@+id/action_symptomsFragment_to_recordingsFragment"
-            app:destination="@id/recordingsFragment" />
+            android:id="@+id/action_symptomsFragment_to_viewRecordingsFragment"
+            app:destination="@id/viewRecordingsFragment" />
 
     </fragment>
     <fragment
@@ -91,8 +91,7 @@
         android:name="com.ihadzhi.eatlimination.ui.SymptomRecordFragment"
         android:label="SymptomRecordFragment" />
     <fragment
-        android:id="@+id/recordingsFragment"
-        android:name="com.ihadzhi.eatlimination.ui.RecordingsFragment"
-        android:label="fragment_recordings"
-        tools:layout="@layout/fragment_recordings" />
+        android:id="@+id/viewRecordingsFragment"
+        android:name="com.ihadzhi.eatlimination.ui.ViewRecordingsFragment"
+        android:label="ViewRecordingsFragment" />
 </navigation>

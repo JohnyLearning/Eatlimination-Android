@@ -5,6 +5,7 @@ import com.ihadzhi.eatlimination.network.model.SpoonFoodAuto;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Single;
 import okhttp3.HttpUrl;
@@ -44,6 +45,8 @@ public class SpoonacularService {
                 Request request = requestBuilder.build();
                 return chain.proceed(request);
             })
+            .readTimeout(60, TimeUnit.SECONDS)
+            .connectTimeout(60, TimeUnit.SECONDS)
             .build();
 
     public SpoonacularService() {

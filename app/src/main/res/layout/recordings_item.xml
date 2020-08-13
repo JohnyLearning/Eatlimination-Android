@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="record"
+            type="com.ihadzhi.eatlimination.data.SymptomRecord" />
+    </data>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="24dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp">
+
+        <ImageView
+            android:id="@+id/food_image"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_gravity="center"
+            tools:src="@drawable/ic_add_food_button"/>
+
+        <TextView
+            android:layout_marginStart="12dp"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:fontFamily="sans-serif"
+            android:textStyle="italic"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:textColor="@color/Black"
+            android:layout_weight="1"
+            android:text="@{record.value}"
+            android:layout_height="wrap_content"
+            tools:text="Food name"/>
+        
+        <ImageView
+            android:id="@+id/add_to_diet"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:tint="@color/colorAccent"
+            android:src="@drawable/ic_add_to_diet" />
+
+    </LinearLayout>
+</layout>
