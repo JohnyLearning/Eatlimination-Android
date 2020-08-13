@@ -23,6 +23,10 @@ public class BaseFragment extends Fragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(title);
     }
 
+    public void setTitle(CharSequence title) {
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(title);
+    }
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);

@@ -13,38 +13,38 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="24dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="12dp">
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="6dp">
 
         <ImageView
-            android:id="@+id/food_image"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:layout_gravity="center"
-            tools:src="@drawable/ic_add_food_button"/>
-
-        <TextView
-            android:layout_marginStart="12dp"
-            android:layout_width="match_parent"
-            android:gravity="center"
-            android:fontFamily="sans-serif"
-            android:textStyle="italic"
-            android:textSize="20sp"
-            android:layout_gravity="center"
-            android:textColor="@color/Black"
-            android:layout_weight="1"
-            android:text="@{record.value}"
-            android:layout_height="wrap_content"
-            tools:text="Food name"/>
-        
-        <ImageView
-            android:id="@+id/add_to_diet"
+            android:id="@+id/symptom_bullet"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_gravity="center"
+            android:layout_gravity="end|center"
             android:tint="@color/colorAccent"
-            android:src="@drawable/ic_add_to_diet" />
+            android:background="@drawable/ic_bullet"/>
+
+        <TextView
+            android:id="@+id/symptom_description"
+            android:layout_width="match_parent"
+            android:fontFamily="sans-serif"
+            android:textStyle="italic"
+            android:textSize="18sp"
+            android:layout_gravity="start|center"
+            android:textColor="@color/Black"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            tools:text="120/80 Recorded on July 20, 2020 @ 20:30"/>
+        
+        <ImageView
+            android:id="@+id/symptom_category"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="12dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="12dp"
+            android:tint="@color/colorAccent"
+            android:background="@drawable/symptom_status_green_background"/>
 
     </LinearLayout>
 </layout>

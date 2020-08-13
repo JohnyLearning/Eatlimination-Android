@@ -1,6 +1,7 @@
 package com.ihadzhi.eatlimination.ui;
 
 import android.content.Context;
+import android.text.SpannableStringBuilder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,11 +9,14 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ihadzhi.eatlimination.R;
 import com.ihadzhi.eatlimination.data.DietDao;
 import com.ihadzhi.eatlimination.data.EatliminationDatabase;
 import com.ihadzhi.eatlimination.data.FoodDao;
 import com.ihadzhi.eatlimination.data.SymptomRecord;
 import com.ihadzhi.eatlimination.databinding.RecordingsItemBinding;
+
+import org.joda.time.DateTime;
 
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -27,14 +31,10 @@ class ViewRecordingsAdapter extends RecyclerView.Adapter<ViewRecordingsAdapter.V
     private final Context context;
     private List<SymptomRecord> records;
     private RecordClickListener recordClickListener;
-    private FoodDao foodDao;
-    private DietDao dietDao;
 
     public ViewRecordingsAdapter(Context context, RecordClickListener recordClickListener) {
         this.context = context;
         this.recordClickListener = recordClickListener;
-        foodDao = EatliminationDatabase.getInstance(context).foodDao();
-        dietDao = EatliminationDatabase.getInstance(context).dietDao();
     }
 
     @NonNull
@@ -74,7 +74,25 @@ class ViewRecordingsAdapter extends RecyclerView.Adapter<ViewRecordingsAdapter.V
         void bind(SymptomRecord record) {
             binding.setRecord(record);
             itemView.setOnClickListener(this);
-
+            DateTime dateTime = new DateTime(record.getTimestamp());
+            String time = dateTime.getHourOfDay() + ":" + dateTime.getMinuteOfHour();
+            StringBuilder description =
+                    new StringBuilder(context.getString(R.string.symptom_description,
+                            record.getValue(),
+                            dateTime.toString("d MMM, yyyy"),
+                            time));
+            binding.symptomDescription.setText(description);
+            switch (record.getCategory()) {
+                case green:
+                    binding.symptomCategory.setBackgroundResource(R.drawable.symptom_status_green_background);
+                    break;
+                case yellow:
+                    binding.symptomCategory.setBackgroundResource(R.drawable.symptom_status_yellow_background);
+                    break;
+                case red:
+                    binding.symptomCategory.setBackgroundResource(R.drawable.symptom_status_red_background);
+                    break;
+            }
         }
 
         @Override

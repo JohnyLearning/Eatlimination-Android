@@ -45,7 +45,9 @@ public class ViewRecordingsFragment extends BaseFragment {
         viewRecordingsAdapter = new ViewRecordingsAdapter(getActivity(), food -> {
             // TODO: define action for food selection
         });
+        setTitle(getString(R.string.recordings_title, "High blood pressure"));
         setHasOptionsMenu(true);
+        showBackButton();
         return dataBinding.getRoot();
     }
 
