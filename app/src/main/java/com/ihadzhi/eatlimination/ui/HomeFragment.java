@@ -38,12 +38,6 @@ public class HomeFragment extends BaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         dataBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false);
-        setHasOptionsMenu(true);
-        homeViewModel = ViewModelProviders.of(getActivity()).get(HomeViewModel.class);
-        homeFoodAdapter = new HomeFoodAdapter(getActivity(), food -> {
-            // TODO: define action for food selection
-        });
-        setHasOptionsMenu(true);
         return dataBinding.getRoot();
     }
 
@@ -52,6 +46,12 @@ public class HomeFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         hideBackButton();
         hideNavigation();
+        setHasOptionsMenu(true);
+        homeViewModel = ViewModelProviders.of(getActivity()).get(HomeViewModel.class);
+        homeFoodAdapter = new HomeFoodAdapter(getActivity(), food -> {
+            // TODO: define action for food selection
+        });
+        homeViewModel.getFoods().removeObservers(getActivity());
         homeViewModel.getFoods().observe(getActivity(), foods -> {
             if (foods != null && foods.size() > 0) {
                 setupFoodListContent(foods);
@@ -74,9 +74,9 @@ public class HomeFragment extends BaseFragment {
             case R.id.add_food_action:
                 addFoodsAction();
                 break;
-            case R.id.diet_action:
-                dietAction();
-                break;
+//            case R.id.diet_action:
+//                dietAction();
+//                break;
         }
         return true;
     }

@@ -11,6 +11,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.ihadzhi.eatlimination.R;
 
+import java.util.Date;
 import java.util.concurrent.Executors;
 
 @Database(entities = {Food.class, Diet.class, Symptom.class, SymptomRecord.class}, version = 1, exportSchema = false)
@@ -37,7 +38,7 @@ public abstract class EatliminationDatabase extends RoomDatabase {
                 if (instance == null) {
                     instance = Room.databaseBuilder(context,
                             EatliminationDatabase.class, DB_NAME)
-//                            .allowMainThreadQueries()
+                            .allowMainThreadQueries()
                             .addCallback(initCallback)
                             .build();
                 }
@@ -52,7 +53,9 @@ public abstract class EatliminationDatabase extends RoomDatabase {
                 @Override
                 public void onCreate(@NonNull SupportSQLiteDatabase db) {
                     Executors.newSingleThreadScheduledExecutor().execute(() -> {
-                        EatliminationDatabase.getInstance(mContext).symptomDao().insertAll(symptoms);
+                        EatliminationDatabase eatliminationDatabase = EatliminationDatabase.getInstance(mContext);
+                        eatliminationDatabase.symptomDao().insertAll(symptoms);
+                        eatliminationDatabase.dietDao().insert(new Diet(true, new Date()));
                     });
                 }
 

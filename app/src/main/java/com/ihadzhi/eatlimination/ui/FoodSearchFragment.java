@@ -31,6 +31,7 @@ public class FoodSearchFragment extends BaseFragment {
         setHasOptionsMenu(true);
 //        searchFoodsViewModel = new ViewModelProvider(ViewModelStore::new).get(SearchFoodsViewModel.class);
         searchFoodsViewModel = ViewModelProviders.of(getActivity()).get(SearchFoodsViewModel.class);
+        setTitle(R.string.search_foods_title);
         return dataBinding.getRoot();
     }
 

@@ -25,8 +25,8 @@ public interface FoodDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insert(Food food);
 
-    @Query("UPDATE Food SET dietId = :dietId WHERE id = :id")
-    int updateFoodDiet(long id, long dietId);
+    @Update
+    int updateFood(Food food);
 
     @Delete
     void delete(Food food);

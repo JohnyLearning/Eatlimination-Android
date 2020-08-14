@@ -34,6 +34,10 @@ public class Food implements Parcelable {
         return dietId;
     }
 
+    public void setDietId(long dietId) {
+        this.dietId = dietId;
+    }
+
     private long dietId;
 
     public Food(long id, Date createdAt, String externalId, String imageUrl, String title, long dietId) {

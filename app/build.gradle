@@ -27,6 +27,9 @@ android {
         all {
             buildConfigField 'String', 'SPOONACULAR_API_KEY', SPOONACULAR_API_KEY
         }
+        debug {
+            resValue("string", "PORT_NUMBER", "8081")
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'

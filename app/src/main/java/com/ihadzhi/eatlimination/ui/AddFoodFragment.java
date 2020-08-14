@@ -2,6 +2,8 @@ package com.ihadzhi.eatlimination.ui;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
@@ -39,15 +41,20 @@ public class AddFoodFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_food, container, false);
         food = AddFoodFragmentArgs.fromBundle(getArguments()).getFood();
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         binding.setFood(food);
-        binding.addFoodAction.setOnClickListener(view -> {
+        binding.addFoodAction.setOnClickListener(viewTemp -> {
             addFoodAction();
         });
         Picasso.get()
                 .load("https://spoonacular.com/cdn/ingredients_500x500/" + food.getImage())
                 .into(binding.foodImage);
         executor = Executors.newFixedThreadPool(1);
-        return binding.getRoot();
     }
 
     private void addFoodAction() {
@@ -55,16 +62,16 @@ public class AddFoodFragment extends Fragment {
         FoodDao foodDao = EatliminationDatabase.getInstance(getActivity()).foodDao();
         DietDao dietDao = EatliminationDatabase.getInstance(getActivity()).dietDao();
         dietDao.fetchActiveDiet().observe(getActivity(), activeDiet -> {
-            executor.execute(() -> {
+//            executor.execute(() -> {
                 if (foodDao.fetchByExternalId(food.getId()).getValue() == null) {
                     Food createFood = new Food(new Date(), String.valueOf(food.getId()), food.getImage(), food.getName(), -1);
                     foodDao.insert(createFood);
                 } else {
                     // show alert that food already exists
                 }
-                NavHostFragment.findNavController(this).navigate(AddFoodFragmentDirections.actionAddFoodFragmentToHomeFragment());
-            });
+//            });
         });
+        NavHostFragment.findNavController(this).navigate(AddFoodFragmentDirections.actionAddFoodFragmentToHomeFragment());
     }
 
 }

@@ -84,10 +84,10 @@ class HomeFoodAdapter extends RecyclerView.Adapter<HomeFoodAdapter.HomeFoodViewH
                     .into(binding.foodImage);
             itemView.setOnClickListener(this);
             if (food.getDietId() >= 0) {
-                binding.addToDiet.setVisibility(View.GONE);
+                binding.addToDietAction.setVisibility(View.GONE);
             } else {
-                binding.addToDiet.setVisibility(View.VISIBLE);
-                binding.addToDiet.setOnClickListener(view -> {
+                binding.addToDietAction.setVisibility(View.VISIBLE);
+                binding.addToDietAction.setOnClickListener(view -> {
                     addToDiet(food);
                 });
             }
@@ -101,19 +101,17 @@ class HomeFoodAdapter extends RecyclerView.Adapter<HomeFoodAdapter.HomeFoodViewH
         }
 
         private void addToDiet(Food food) {
+            dietDao.fetchActiveDiet().removeObservers((LifecycleOwner) context);
             dietDao.fetchActiveDiet().observe((LifecycleOwner) context, activeDiet -> {
-                executor = Executors.newFixedThreadPool(1);
-                if (activeDiet == null) {
-                    executor.execute(() -> {
-                        long dietId = dietDao.insert(new Diet(true, new Date()));
-                        foodDao.updateFoodDiet(food.getId(), dietId);
-                    });
-                } else {
-                    executor.execute(() -> {
-                        foodDao.updateFoodDiet(food.getId(), activeDiet.getId());
-                    });
+//                executor = Executors.newFixedThreadPool(1);
+                if (activeDiet != null) {
+//                    executor.execute(() -> {
+                        food.setDietId(activeDiet.getId());
+                        foodDao.updateFood(food);
+                        binding.addToDietAction.setVisibility(View.GONE);
+//                    });
                 }
-                binding.addToDiet.setVisibility(View.GONE);
+
             });
         }
 

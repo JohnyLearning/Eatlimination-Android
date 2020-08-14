@@ -13,6 +13,7 @@ interface SpoonacularApi {
 
     @GET("food/ingredients/autocomplete")
     Single<List<SpoonFoodAuto>> searchAutoComplete(@Query("query") CharSequence searchString,
-                                                   @Query("number") int numberOfResults);
+                                                   @Query("number") int numberOfResults,
+                                                   @Query("metaInformation") Boolean includeMeta);
 
 }

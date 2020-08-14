@@ -39,7 +39,7 @@
             tools:text="Food name"/>
         
         <ImageView
-            android:id="@+id/add_to_diet"
+            android:id="@+id/add_to_diet_action"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="center"

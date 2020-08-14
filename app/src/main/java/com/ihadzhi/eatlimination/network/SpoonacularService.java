@@ -60,6 +60,6 @@ public class SpoonacularService {
     }
 
     public Single<List<SpoonFoodAuto>> searchFoods(CharSequence searchFoodQuery) {
-        return spoonacularApi.searchAutoComplete(searchFoodQuery, 20);
+        return spoonacularApi.searchAutoComplete(searchFoodQuery, 20, true);
     }
 }
