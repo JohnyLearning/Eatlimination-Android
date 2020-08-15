@@ -46,6 +46,7 @@ public class FoodsIncludedFragment extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        setTitle(R.string.foods_included_title);
         foodsIncludedAdapter = new FoodsIncludedAdapter(getActivity(), food -> {
             // TODO: define action for food selection
         });

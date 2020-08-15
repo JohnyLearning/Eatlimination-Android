@@ -41,10 +41,11 @@
             android:id="@+id/symptom_recording_action"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:paddingEnd="24dp"
+            android:layout_marginEnd="24dp"
             android:layout_gravity="center_vertical"
             android:tint="@color/colorAccent"
-            android:src="@drawable/ic_add_to_diet" />
+            android:backgroundTint="@color/colorPrimary"
+            android:background="@drawable/ic_recording_note" />
 
     </LinearLayout>
 </layout>

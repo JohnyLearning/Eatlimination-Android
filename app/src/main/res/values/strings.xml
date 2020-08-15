@@ -9,6 +9,9 @@
     <string name="recording_symptom_status_selection">Please select the status of this recording</string>
     <string name="symptom_description"><b>%1$s</b>, recorded on %2$s @ %3$s</string>
 
+    <string name="foods_included_title">Elimination foods</string>
+    <string name="symptoms_title">Symptoms</string>
+    <string name="new_recording_title">New record for %1$s</string>
     <string name="recordings_title">%1$s records</string>
     <string name="search_foods_title">Search for new foods to add</string>
 </resources>

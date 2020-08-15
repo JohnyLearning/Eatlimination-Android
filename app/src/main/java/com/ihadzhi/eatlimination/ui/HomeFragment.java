@@ -74,9 +74,9 @@ public class HomeFragment extends BaseFragment {
             case R.id.add_food_action:
                 addFoodsAction();
                 break;
-//            case R.id.diet_action:
-//                dietAction();
-//                break;
+            case R.id.diet_action:
+                dietAction();
+                break;
         }
         return true;
     }

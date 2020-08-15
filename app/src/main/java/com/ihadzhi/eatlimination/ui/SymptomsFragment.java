@@ -21,7 +21,7 @@ import com.ihadzhi.eatlimination.R;
 import com.ihadzhi.eatlimination.databinding.SymptomsFragmentBinding;
 import com.ihadzhi.eatlimination.viewmodel.SymptomsViewModel;
 
-public class SymptomsFragment extends Fragment {
+public class SymptomsFragment extends BaseFragment {
 
     private SymptomsViewModel symptomsViewModel;
     private SymptomsAdapter symptomsAdapter;
@@ -42,11 +42,15 @@ public class SymptomsFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        setTitle(R.string.symptoms_title);
         symptomsViewModel = ViewModelProviders.of(this).get(SymptomsViewModel.class);
-        symptomsAdapter = new SymptomsAdapter(getActivity(), symptoms -> {
-//            NavHostFragment.findNavController(this).navigate(SymptomsFragmentDirections.actionSymptomsFragmentToSymptomRecordFragment());
-            NavHostFragment.findNavController(this).navigate(SymptomsFragmentDirections.actionSymptomsFragmentToViewRecordingsFragment());
-        });
+        symptomsAdapter = new SymptomsAdapter(getActivity(),
+                symptom -> {
+                    NavHostFragment.findNavController(this).navigate(SymptomsFragmentDirections.actionSymptomsFragmentToViewRecordingsFragment());
+                },
+                symptom -> {
+                    NavHostFragment.findNavController(this).navigate(SymptomsFragmentDirections.actionSymptomsFragmentToSymptomRecordFragment());
+                });
         symptomsViewModel.getSymptoms().observe(getActivity(), symptoms -> {
             symptomsAdapter.setSymptoms(symptoms);
             LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);

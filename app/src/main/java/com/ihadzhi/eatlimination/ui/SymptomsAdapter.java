@@ -25,13 +25,20 @@ class SymptomsAdapter extends RecyclerView.Adapter<SymptomsAdapter.SymptomsViewH
         void execute(Symptom symptom);
     }
 
+    @FunctionalInterface
+    public interface NewRecordClickListener {
+        void execute(Symptom symptom);
+    }
+
     private final Context context;
     private List<Symptom> symptoms;
     private SymptomClickListener symptomClickListener;
+    private NewRecordClickListener newRecordClickListener;
 
-    public SymptomsAdapter(Context context, SymptomClickListener symptomClickListener) {
+    public SymptomsAdapter(Context context, SymptomClickListener symptomClickListener, NewRecordClickListener newRecordClickListener) {
         this.context = context;
         this.symptomClickListener = symptomClickListener;
+        this.newRecordClickListener = newRecordClickListener;
     }
 
     @NonNull
@@ -72,6 +79,11 @@ class SymptomsAdapter extends RecyclerView.Adapter<SymptomsAdapter.SymptomsViewH
             binding.setSymptom(symptom);
             binding.symptomImage.setImageDrawable(context.getResources().getDrawable(symptom.getImageResource(), null));
             itemView.setOnClickListener(this);
+            binding.symptomRecordingAction.setOnClickListener(view -> {
+                if (newRecordClickListener != null) {
+                    newRecordClickListener.execute(symptom);
+                }
+            });
         }
 
         @Override

@@ -48,7 +48,9 @@ public class SymptomRecordFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        setTitle(getString(R.string.new_recording_title, "High blood pressure"));
+        dataBinding.symptomImage.setImageDrawable(getContext().getDrawable(R.drawable.hbp));
+        dataBinding.symptomDescription.setText("Quick zephyrs blow, vexing daft Jim. Sphinx of black quartz, judge my vow. Two driven jocks help fax my big quiz. Five quacking zephyrs jolt my wax bed. The five boxing wizards jump quickly.");
     }
 
     @Override
