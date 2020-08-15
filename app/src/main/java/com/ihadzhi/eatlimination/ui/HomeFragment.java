@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SimpleItemAnimator;
 
 import com.ihadzhi.eatlimination.R;
 import com.ihadzhi.eatlimination.data.Food;
@@ -44,6 +45,7 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        setTitle(R.string.home_title);
         hideBackButton();
         hideNavigation();
         setHasOptionsMenu(true);
@@ -59,6 +61,7 @@ public class HomeFragment extends BaseFragment {
                 setupNoFoodsUi();
             }
         });
+        ((SimpleItemAnimator)dataBinding.foodsList.getItemAnimator()).setSupportsChangeAnimations(false);
     }
 
     @Override

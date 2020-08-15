@@ -73,9 +73,9 @@
         <action
             android:id="@+id/back_to_homeFragment"
             app:destination="@id/homeFragment"
-            app:launchSingleTop="true"
             app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="false" />
+            app:popUpToInclusive="true"/>
+
         <action
             android:id="@+id/action_symptomsFragment_to_symptomRecordFragment"
             app:destination="@id/symptomRecordFragment"
@@ -86,10 +86,15 @@
             app:destination="@id/viewRecordingsFragment" />
 
     </fragment>
+
     <fragment
         android:id="@+id/symptomRecordFragment"
         android:name="com.ihadzhi.eatlimination.ui.SymptomRecordFragment"
-        android:label="SymptomRecordFragment" />
+        android:label="SymptomRecordFragment" >
+        <action
+            android:id="@+id/back_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/viewRecordingsFragment"
         android:name="com.ihadzhi.eatlimination.ui.ViewRecordingsFragment"

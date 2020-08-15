@@ -62,14 +62,14 @@ public class AddFoodFragment extends Fragment {
         FoodDao foodDao = EatliminationDatabase.getInstance(getActivity()).foodDao();
         DietDao dietDao = EatliminationDatabase.getInstance(getActivity()).dietDao();
         dietDao.fetchActiveDiet().observe(getActivity(), activeDiet -> {
-//            executor.execute(() -> {
+            executor.execute(() -> {
                 if (foodDao.fetchByExternalId(food.getId()).getValue() == null) {
                     Food createFood = new Food(new Date(), String.valueOf(food.getId()), food.getImage(), food.getName(), -1);
                     foodDao.insert(createFood);
                 } else {
                     // show alert that food already exists
                 }
-//            });
+            });
         });
         NavHostFragment.findNavController(this).navigate(AddFoodFragmentDirections.actionAddFoodFragmentToHomeFragment());
     }

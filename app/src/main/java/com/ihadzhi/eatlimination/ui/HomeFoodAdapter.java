@@ -59,7 +59,6 @@ class HomeFoodAdapter extends RecyclerView.Adapter<HomeFoodAdapter.HomeFoodViewH
 
     public void setFoods(List<Food> foods) {
         this.foods = foods;
-        notifyDataSetChanged();
     }
 
     @Override
@@ -84,7 +83,7 @@ class HomeFoodAdapter extends RecyclerView.Adapter<HomeFoodAdapter.HomeFoodViewH
                     .into(binding.foodImage);
             itemView.setOnClickListener(this);
             if (food.getDietId() >= 0) {
-                binding.addToDietAction.setVisibility(View.GONE);
+                binding.addToDietAction.setVisibility(View.INVISIBLE);
             } else {
                 binding.addToDietAction.setVisibility(View.VISIBLE);
                 binding.addToDietAction.setOnClickListener(view -> {
@@ -101,15 +100,15 @@ class HomeFoodAdapter extends RecyclerView.Adapter<HomeFoodAdapter.HomeFoodViewH
         }
 
         private void addToDiet(Food food) {
-            dietDao.fetchActiveDiet().removeObservers((LifecycleOwner) context);
+//            dietDao.fetchActiveDiet().removeObservers((LifecycleOwner) context);
             dietDao.fetchActiveDiet().observe((LifecycleOwner) context, activeDiet -> {
-//                executor = Executors.newFixedThreadPool(1);
+                executor = Executors.newFixedThreadPool(1);
                 if (activeDiet != null) {
-//                    executor.execute(() -> {
+                    executor.execute(() -> {
                         food.setDietId(activeDiet.getId());
                         foodDao.updateFood(food);
-                        binding.addToDietAction.setVisibility(View.GONE);
-//                    });
+                        binding.addToDietAction.setVisibility(View.INVISIBLE);
+                    });
                 }
 
             });

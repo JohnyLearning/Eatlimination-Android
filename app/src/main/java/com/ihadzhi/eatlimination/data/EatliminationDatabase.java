@@ -38,7 +38,7 @@ public abstract class EatliminationDatabase extends RoomDatabase {
                 if (instance == null) {
                     instance = Room.databaseBuilder(context,
                             EatliminationDatabase.class, DB_NAME)
-                            .allowMainThreadQueries()
+//                            .allowMainThreadQueries()
                             .addCallback(initCallback)
                             .build();
                 }

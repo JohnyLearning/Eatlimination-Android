@@ -43,6 +43,7 @@ public class SymptomsFragment extends BaseFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setTitle(R.string.symptoms_title);
+        showBackButton();
         symptomsViewModel = ViewModelProviders.of(this).get(SymptomsViewModel.class);
         symptomsAdapter = new SymptomsAdapter(getActivity(),
                 symptom -> {
