@@ -69,7 +69,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="New value:"
+            android:text="@string/new_value_label"
             android:textSize="22sp"
             android:textStyle="italic"
             android:textColor="@color/Black"
@@ -77,7 +77,8 @@
             android:gravity="right"
             app:layout_constraintTop_toBottomOf="@id/symptom_description"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/new_value"/>
+            app:layout_constraintEnd_toStartOf="@id/new_value"
+            app:layout_constraintBottom_toBottomOf="@+id/new_value"/>
 
         <EditText
             android:id="@+id/new_value"
@@ -85,13 +86,14 @@
             android:layout_marginTop="24dp"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:textSize="24sp"
             app:layout_constraintTop_toBottomOf="@id/symptom_description"
             app:layout_constraintStart_toEndOf="@id/new_value_title"
             android:layout_marginEnd="48dp"
             app:layout_constraintEnd_toEndOf="parent"
             style="@style/Widget.AppCompat.EditText"/>
 
-        <View
+        <ImageView
             android:id="@+id/green_status"
             android:layout_width="70dp"
             android:layout_height="0dp"
@@ -101,21 +103,21 @@
             app:layout_constraintStart_toStartOf="@id/recording_status_selection"
             app:layout_constraintEnd_toStartOf="@id/yellow_status"/>
 
-        <View
+        <ImageView
             android:id="@+id/yellow_status"
             android:layout_width="70dp"
             android:layout_height="0dp"
-            android:background="@drawable/symptom_status_yellow_background"
+            android:background="@drawable/yellow_status_inactive"
             app:layout_constraintTop_toTopOf="@id/recording_status_selection"
             app:layout_constraintBottom_toBottomOf="@id/recording_status_selection"
             app:layout_constraintStart_toEndOf="@id/green_status"
             app:layout_constraintEnd_toStartOf="@id/red_status"/>
 
-        <View
+        <ImageView
             android:id="@+id/red_status"
             android:layout_width="70dp"
             android:layout_height="0dp"
-            android:background="@drawable/symptom_status_red_background"
+            android:background="@drawable/red_status_inactive"
             app:layout_constraintTop_toTopOf="@id/recording_status_selection"
             app:layout_constraintBottom_toBottomOf="@id/recording_status_selection"
             app:layout_constraintEnd_toEndOf="@id/recording_status_selection"
@@ -130,7 +132,9 @@
             android:background="@drawable/symptom_status_background"
             app:layout_constraintTop_toBottomOf="@+id/new_value"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
             android:layout_marginTop="24dp"
             android:textSize="18sp"
             android:gravity="center"
