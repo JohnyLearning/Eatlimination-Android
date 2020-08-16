@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ihadzhi.eatlimination.R;
+import com.ihadzhi.eatlimination.data.Symptom;
 import com.ihadzhi.eatlimination.data.SymptomRecord;
 import com.ihadzhi.eatlimination.databinding.SymptomRecordFragmentBinding;
 import com.ihadzhi.eatlimination.databinding.SymptomsFragmentBinding;
@@ -28,6 +29,7 @@ public class SymptomRecordFragment extends BaseFragment {
 
     private SymptomRecordViewModel viewModel;
     private SymptomRecordFragmentBinding dataBinding;
+    private Symptom symptom;
 
     public static SymptomRecordFragment newInstance() {
         return new SymptomRecordFragment();
@@ -39,6 +41,8 @@ public class SymptomRecordFragment extends BaseFragment {
         dataBinding = DataBindingUtil.inflate(inflater, R.layout.symptom_record_fragment, container, false);
         hideNavigation();
         setHasOptionsMenu(true);
+        symptom = SymptomRecordFragmentArgs.fromBundle(getArguments()).getSymptom();
+        dataBinding.setSymptom(symptom);
         return dataBinding.getRoot();
     }
 

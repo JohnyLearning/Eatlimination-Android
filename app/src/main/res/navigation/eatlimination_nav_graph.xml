@@ -85,16 +85,26 @@
         android:id="@+id/symptomRecordFragment"
         android:name="com.ihadzhi.eatlimination.ui.SymptomRecordFragment"
         android:label="SymptomRecordFragment" >
+
+        <argument android:name="symptom" app:argType="com.ihadzhi.eatlimination.data.Symptom"/>
+
         <action
             android:id="@+id/back_to_symptoms"
             app:destination="@id/symptomsFragment" />
+
     </fragment>
+
     <fragment
         android:id="@+id/viewRecordingsFragment"
         android:name="com.ihadzhi.eatlimination.ui.ViewRecordingsFragment"
         android:label="ViewRecordingsFragment" >
+
+        <argument android:name="symptom" app:argType="com.ihadzhi.eatlimination.data.Symptom"/>
+
         <action
             android:id="@+id/back_to_symptomsFragment"
             app:destination="@id/symptomsFragment" />
+
     </fragment>
+
 </navigation>

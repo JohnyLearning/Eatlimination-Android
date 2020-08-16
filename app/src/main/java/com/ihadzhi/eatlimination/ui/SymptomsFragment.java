@@ -48,10 +48,10 @@ public class SymptomsFragment extends BaseFragment {
         symptomsViewModel = ViewModelProviders.of(this).get(SymptomsViewModel.class);
         symptomsAdapter = new SymptomsAdapter(getActivity(),
                 symptom -> {
-                    NavHostFragment.findNavController(this).navigate(SymptomsFragmentDirections.actionSymptomsFragmentToViewRecordingsFragment());
+                    NavHostFragment.findNavController(this).navigate(SymptomsFragmentDirections.actionSymptomsFragmentToViewRecordingsFragment(symptom));
                 },
                 symptom -> {
-                    NavHostFragment.findNavController(this).navigate(SymptomsFragmentDirections.actionSymptomsFragmentToSymptomRecordFragment());
+                    NavHostFragment.findNavController(this).navigate(SymptomsFragmentDirections.actionSymptomsFragmentToSymptomRecordFragment(symptom));
                 });
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
         dataBinding.symptomsList.setLayoutManager(layoutManager);

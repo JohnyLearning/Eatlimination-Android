@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="High blood pressure"
+            android:text="@{symptom.name}"
             tools:text="Headache"
             android:textColor="@color/Black"
             android:textSize="26sp"
@@ -58,11 +58,11 @@
             android:id="@+id/symptom_description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:text="@{symptom.description}"
             app:layout_constraintTop_toBottomOf="@id/symptom_name_divider"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_margin="24dp"
-            android:text="Quick zephyrs blow, vexing daft Jim. Sphinx of black quartz, judge my vow. Two driven jocks help fax my big quiz. Five quacking zephyrs jolt my wax bed. The five boxing wizards jump quickly." />
+            android:layout_margin="24dp" />
 
         <TextView
             android:id="@+id/new_value_title"

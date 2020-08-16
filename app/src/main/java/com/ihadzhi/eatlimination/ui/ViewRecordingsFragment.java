@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ihadzhi.eatlimination.R;
 import com.ihadzhi.eatlimination.data.Food;
+import com.ihadzhi.eatlimination.data.Symptom;
 import com.ihadzhi.eatlimination.data.SymptomRecord;
 import com.ihadzhi.eatlimination.databinding.FragmentHomeBinding;
 import com.ihadzhi.eatlimination.databinding.FragmentRecordingsBinding;
@@ -35,11 +36,13 @@ public class ViewRecordingsFragment extends BaseFragment {
     private FragmentRecordingsBinding dataBinding;
     private ViewRecordingsViewModel viewRecordingsViewModel;
     private ViewRecordingsAdapter viewRecordingsAdapter;
+    private Symptom symptom;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         dataBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_recordings, container, false);
+        symptom = SymptomRecordFragmentArgs.fromBundle(getArguments()).getSymptom();
         return dataBinding.getRoot();
     }
 
