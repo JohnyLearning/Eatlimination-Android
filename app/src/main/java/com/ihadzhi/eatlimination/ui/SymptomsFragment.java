@@ -40,10 +40,11 @@ public class SymptomsFragment extends BaseFragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         setTitle(R.string.symptoms_title);
         showBackButton();
+        showNavigation();
         symptomsViewModel = ViewModelProviders.of(this).get(SymptomsViewModel.class);
         symptomsAdapter = new SymptomsAdapter(getActivity(),
                 symptom -> {
@@ -52,18 +53,12 @@ public class SymptomsFragment extends BaseFragment {
                 symptom -> {
                     NavHostFragment.findNavController(this).navigate(SymptomsFragmentDirections.actionSymptomsFragmentToSymptomRecordFragment());
                 });
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
+        dataBinding.symptomsList.setLayoutManager(layoutManager);
+        dataBinding.symptomsList.setAdapter(symptomsAdapter);
         symptomsViewModel.getSymptoms().observe(getActivity(), symptoms -> {
             symptomsAdapter.setSymptoms(symptoms);
-            LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
-            dataBinding.symptomsList.setLayoutManager(layoutManager);
-            dataBinding.symptomsList.setAdapter(symptomsAdapter);
         });
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
     }
 
     @Override

@@ -9,17 +9,14 @@
         android:id="@+id/homeFragment"
         android:name="com.ihadzhi.eatlimination.ui.HomeFragment"
         android:label="homeFragment">
+
         <action
             android:id="@+id/action_homeFragment_to_foodSearchFragment"
-            app:destination="@+id/foodSearchFragment"
-            app:enterAnim="@anim/fragment_fade_enter"
-            app:exitAnim="@anim/fragment_fade_exit" />
+            app:destination="@+id/foodSearchFragment"/>
+
         <action
             android:id="@+id/move_from_homeFragment_to_foodsIncludedFragment"
-            app:destination="@id/foodsIncludedFragment"
-            app:enterAnim="@anim/fragment_fade_enter"
-            app:exitAnim="@anim/fragment_fade_exit"
-            app:launchSingleTop="true"/>
+            app:destination="@id/foodsIncludedFragment"/>
     </fragment>
 
     <fragment
@@ -33,9 +30,7 @@
             android:id="@+id/action_foodSearchFragment_to_homeFragment2"
             app:destination="@id/homeFragment"
             app:enterAnim="@anim/fragment_fade_enter"
-            app:exitAnim="@anim/fragment_fade_exit"
-            app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="true"/>
+            app:exitAnim="@anim/fragment_fade_exit" />
     </fragment>
 
     <fragment
@@ -45,11 +40,14 @@
         tools:layout="@layout/fragment_add_food">
 
         <argument android:name="food" app:argType="com.ihadzhi.eatlimination.network.model.SpoonFoodAuto"/>
+
         <action
-            android:id="@+id/action_addFoodFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="false" />
+            android:id="@+id/back_to_homeFragment"
+            app:destination="@id/homeFragment"/>
+
+        <action
+            android:id="@+id/back_to_foodSearchFragment"
+            app:destination="@id/foodSearchFragment" />
 
     </fragment>
 
@@ -59,9 +57,7 @@
 
         <action
             android:id="@+id/back_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="true"/>
+            app:destination="@id/homeFragment"/>
 
     </fragment>
 
@@ -72,9 +68,7 @@
 
         <action
             android:id="@+id/back_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="true"/>
+            app:destination="@id/homeFragment" />
 
         <action
             android:id="@+id/action_symptomsFragment_to_symptomRecordFragment"
@@ -92,8 +86,8 @@
         android:name="com.ihadzhi.eatlimination.ui.SymptomRecordFragment"
         android:label="SymptomRecordFragment" >
         <action
-            android:id="@+id/back_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            android:id="@+id/back_to_symptoms"
+            app:destination="@id/symptomsFragment" />
     </fragment>
     <fragment
         android:id="@+id/viewRecordingsFragment"

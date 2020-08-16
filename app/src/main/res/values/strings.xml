@@ -15,4 +15,5 @@
     <string name="recordings_title">%1$s records</string>
     <string name="search_foods_title">Search for new foods to add</string>
     <string name="home_title">"Your foods"</string>
+    <string name="add_food_title">"Add %1$s to your foods"</string>
 </resources>

@@ -56,7 +56,7 @@ public class SymptomRecordFragment extends BaseFragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            NavHostFragment.findNavController(this).navigate(SymptomsFragmentDirections.backToHomeFragment());
+            NavHostFragment.findNavController(this).navigate(SymptomRecordFragmentDirections.backToSymptoms());
             return true;
         }
         return super.onOptionsItemSelected(item);

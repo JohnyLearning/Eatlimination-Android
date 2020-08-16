@@ -5,15 +5,14 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.ihadzhi.eatlimination.R;
-import com.ihadzhi.eatlimination.data.Diet;
 import com.ihadzhi.eatlimination.data.DietDao;
 import com.ihadzhi.eatlimination.data.EatliminationDatabase;
 import com.ihadzhi.eatlimination.data.Food;
@@ -26,7 +25,7 @@ import java.util.Date;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class AddFoodFragment extends Fragment {
+public class AddFoodFragment extends BaseFragment {
 
     private SpoonFoodAuto food;
     private FragmentAddFoodBinding binding;
@@ -47,6 +46,9 @@ public class AddFoodFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        setHasOptionsMenu(true);
+        showBackButton();
+        setTitle(getContext().getString(R.string.add_food_title, food.getName()));
         binding.setFood(food);
         binding.addFoodAction.setOnClickListener(viewTemp -> {
             addFoodAction();
@@ -71,7 +73,15 @@ public class AddFoodFragment extends Fragment {
                 }
             });
         });
-        NavHostFragment.findNavController(this).navigate(AddFoodFragmentDirections.actionAddFoodFragmentToHomeFragment());
+        NavHostFragment.findNavController(this).navigate(AddFoodFragmentDirections.backToHomeFragment());
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            NavHostFragment.findNavController(this).navigate(AddFoodFragmentDirections.backToFoodSearchFragment());
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
