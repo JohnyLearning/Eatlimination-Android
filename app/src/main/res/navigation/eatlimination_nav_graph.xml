@@ -13,10 +13,10 @@
         <action
             android:id="@+id/action_homeFragment_to_foodSearchFragment"
             app:destination="@+id/foodSearchFragment"/>
-
         <action
-            android:id="@+id/move_from_homeFragment_to_foodsIncludedFragment"
-            app:destination="@id/foodsIncludedFragment"/>
+            android:id="@+id/action_homeFragment_to_foodsIncludedFragment"
+            app:destination="@id/foodsIncludedFragment" />
+
     </fragment>
 
     <fragment
@@ -92,5 +92,9 @@
     <fragment
         android:id="@+id/viewRecordingsFragment"
         android:name="com.ihadzhi.eatlimination.ui.ViewRecordingsFragment"
-        android:label="ViewRecordingsFragment" />
+        android:label="ViewRecordingsFragment" >
+        <action
+            android:id="@+id/back_to_symptomsFragment"
+            app:destination="@id/symptomsFragment" />
+    </fragment>
 </navigation>

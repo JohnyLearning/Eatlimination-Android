@@ -40,31 +40,25 @@ public class ViewRecordingsFragment extends BaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         dataBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_recordings, container, false);
-        setHasOptionsMenu(true);
-        viewRecordingsViewModel = ViewModelProviders.of(getActivity()).get(ViewRecordingsViewModel.class);
-        viewRecordingsAdapter = new ViewRecordingsAdapter(getActivity(), food -> {
-            // TODO: define action for food selection
-        });
-        setTitle(getString(R.string.recordings_title, "High blood pressure"));
-        setHasOptionsMenu(true);
-        showBackButton();
         return dataBinding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        hideBackButton();
+        setTitle(getString(R.string.recordings_title, "High blood pressure"));
+        setHasOptionsMenu(true);
+        showBackButton();
         hideNavigation();
+        viewRecordingsViewModel = ViewModelProviders.of(getActivity()).get(ViewRecordingsViewModel.class);
+        viewRecordingsAdapter = new ViewRecordingsAdapter(getActivity(), food -> {
+            // TODO: define action for food selection
+        });
         viewRecordingsViewModel.getRecordings().observe(getActivity(), records -> {
             if (records != null && records.size() > 0) {
                 setupRecordsContent(records);
             }
         });
-    }
-
-    private void addFoodsAction() {
-        NavHostFragment.findNavController(this).navigate(HomeFragmentDirections.actionHomeFragmentToFoodSearchFragment());
     }
 
     private void setupRecordsContent(@NotNull List<SymptomRecord> records) {
@@ -74,6 +68,15 @@ public class ViewRecordingsFragment extends BaseFragment {
             dataBinding.recordsList.setLayoutManager(layoutManager);
             dataBinding.recordsList.setAdapter(viewRecordingsAdapter);
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            NavHostFragment.findNavController(this).navigate(ViewRecordingsFragmentDirections.backToSymptomsFragment());
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }
