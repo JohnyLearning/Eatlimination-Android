@@ -63,16 +63,32 @@ public class AddFoodFragment extends BaseFragment {
         // add to room
         FoodDao foodDao = EatliminationDatabase.getInstance(getActivity()).foodDao();
         DietDao dietDao = EatliminationDatabase.getInstance(getActivity()).dietDao();
+        showLoadingIndicator();
+        dietDao.fetchActiveDiet().removeObservers(getActivity());
+        foodDao.fetchByExternalId(food.getId()).removeObservers(getActivity());
         dietDao.fetchActiveDiet().observe(getActivity(), activeDiet -> {
-            executor.execute(() -> {
-                if (foodDao.fetchByExternalId(food.getId()).getValue() == null) {
-                    Food createFood = new Food(new Date(), String.valueOf(food.getId()), food.getImage(), food.getName(), -1);
-                    foodDao.insert(createFood);
-                } else {
+            foodDao.fetchByExternalId(food.getId()).observe(getActivity(), foundFoods -> {
+                if (foundFoods != null && foundFoods.size() > 0) {
                     // show alert that food already exists
+                } else {
+                    executor.execute(() -> {
+                        Food createFood = new Food(new Date(), String.valueOf(food.getId()), food.getImage(), food.getName(), -1);
+                        foodDao.insert(createFood);
+                    });
                 }
             });
+//            executor.execute(() -> {
+//                if (foodDao.fetchByExternalId(food.getId()).getValue() == null) {
+//                    Food createFood = new Food(new Date(), String.valueOf(food.getId()), food.getImage(), food.getName(), -1);
+//                    foodDao.insert(createFood);
+//                } else {
+//                    // show alert that food already exists
+//                }
+//                hideLoadingIndicator();
+//                NavHostFragment.findNavController(this).navigate(AddFoodFragmentDirections.backToHomeFragment());
+//            });
         });
+        hideLoadingIndicator();
         NavHostFragment.findNavController(this).navigate(AddFoodFragmentDirections.backToHomeFragment());
     }
 

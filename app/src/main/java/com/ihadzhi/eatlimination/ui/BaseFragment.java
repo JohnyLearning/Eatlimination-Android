@@ -32,6 +32,8 @@ public class BaseFragment extends Fragment {
         super.onAttach(context);
         if (context instanceof ContainerInteractor) {
             containerInteractor = (ContainerInteractor) context;
+        } else {
+            throw new IllegalStateException("context should be instance of ContainerInteractor");
         }
     }
 
@@ -41,5 +43,13 @@ public class BaseFragment extends Fragment {
 
     public void hideNavigation() {
         containerInteractor.hideBottomNavigation();
+    }
+
+    public void showLoadingIndicator() {
+        containerInteractor.showLoadingIndicator();
+    }
+
+    public void hideLoadingIndicator() {
+        containerInteractor.hideLoadingIndicator();
     }
 }

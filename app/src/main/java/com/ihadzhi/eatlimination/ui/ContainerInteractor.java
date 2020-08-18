@@ -6,4 +6,8 @@ public interface ContainerInteractor {
 
     void showBottomNavigation();
 
+    void showLoadingIndicator();
+
+    void hideLoadingIndicator();
+
 }

@@ -12,6 +12,7 @@ import androidx.navigation.ui.NavigationUI;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.ihadzhi.eatlimination.R;
@@ -19,12 +20,14 @@ import com.ihadzhi.eatlimination.R;
 public class StartActivity extends AppCompatActivity implements ContainerInteractor {
 
     private BottomNavigationView bottomNavigationView;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
+        progressBar = findViewById(R.id.progress_bar);
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
     }
@@ -39,4 +42,14 @@ public class StartActivity extends AppCompatActivity implements ContainerInterac
         bottomNavigationView.setVisibility(View.VISIBLE);
     }
 
+    @Override
+    public void showLoadingIndicator() {
+        progressBar.setVisibility(View.VISIBLE);
+        progressBar.animate();
+    }
+
+    @Override
+    public void hideLoadingIndicator() {
+        progressBar.setVisibility(View.GONE);
+    }
 }
