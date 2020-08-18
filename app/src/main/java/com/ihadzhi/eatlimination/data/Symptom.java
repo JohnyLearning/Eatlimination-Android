@@ -40,7 +40,7 @@ public class Symptom implements Parcelable {
     }
 
     public Drawable getImage(Context context) {
-        return context.getDrawable(context.getResources().getIdentifier(name, "drawable", context.getPackageName()));
+        return context.getDrawable(context.getResources().getIdentifier(imageName, "drawable", context.getPackageName()));
     }
 
     public String getName() {
