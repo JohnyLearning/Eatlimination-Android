@@ -1,5 +1,8 @@
 package com.ihadzhi.eatlimination.data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.Ignore;
@@ -8,13 +11,11 @@ import androidx.room.PrimaryKey;
 import java.util.Date;
 
 @Entity
-public class SymptomRecord {
+public class SymptomRecord implements Parcelable {
 
     public enum SymptomCategory {
         green, yellow, red
     }
-
-
 
     @PrimaryKey
     @NonNull
@@ -44,6 +45,14 @@ public class SymptomRecord {
         this.symptomId = symptomId;
     }
 
+    @Ignore
+    public SymptomRecord(SymptomCategory category, String value, long symptomId) {
+        this.category = category;
+        this.value = value;
+        this.timestamp = new Date();
+        this.symptomId = symptomId;
+    }
+
     @NonNull
     public long getId() {
         return id;
@@ -64,4 +73,40 @@ public class SymptomRecord {
     public long getSymptomId() {
         return symptomId;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(this.id);
+        dest.writeInt(this.category == null ? -1 : this.category.ordinal());
+        dest.writeString(this.value);
+        dest.writeLong(this.timestamp != null ? this.timestamp.getTime() : -1);
+        dest.writeLong(this.symptomId);
+    }
+
+    protected SymptomRecord(Parcel in) {
+        this.id = in.readLong();
+        int tmpCategory = in.readInt();
+        this.category = tmpCategory == -1 ? null : SymptomCategory.values()[tmpCategory];
+        this.value = in.readString();
+        long tmpTimestamp = in.readLong();
+        this.timestamp = tmpTimestamp == -1 ? null : new Date(tmpTimestamp);
+        this.symptomId = in.readLong();
+    }
+
+    public static final Parcelable.Creator<SymptomRecord> CREATOR = new Parcelable.Creator<SymptomRecord>() {
+        @Override
+        public SymptomRecord createFromParcel(Parcel source) {
+            return new SymptomRecord(source);
+        }
+
+        @Override
+        public SymptomRecord[] newArray(int size) {
+            return new SymptomRecord[size];
+        }
+    };
 }

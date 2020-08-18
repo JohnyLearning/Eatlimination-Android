@@ -2,6 +2,8 @@ package com.ihadzhi.eatlimination.data;
 
 import androidx.room.TypeConverter;
 
+import com.ihadzhi.eatlimination.data.SymptomRecord.SymptomCategory;
+
 import java.util.Date;
 
 public class Converters {
@@ -17,12 +19,12 @@ public class Converters {
     }
 
     @TypeConverter
-    public static SymptomRecord.SymptomCategory fromInt(int index) {
-        return index >= 0 && index < SymptomRecord.SymptomCategory.values().length ? null : SymptomRecord.SymptomCategory.values()[index];
+    public static SymptomCategory fromInt(int index) {
+        return index >= 0 && index < SymptomCategory.values().length ? null : SymptomCategory.values()[index];
     }
 
     @TypeConverter
-    public static Integer categoryToInt(SymptomRecord.SymptomCategory category) {
+    public static Integer categoryToInt(SymptomCategory category) {
         return category == null ? null : category.ordinal();
     }
 

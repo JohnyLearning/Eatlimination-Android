@@ -19,10 +19,10 @@ import java.util.concurrent.Executors;
 public abstract class EatliminationDatabase extends RoomDatabase {
 
     private static final Symptom[] symptoms = new Symptom[] {
-        new Symptom(100, "High blood pressure", "Common condition in which the long-term force of the blood against your artery walls is high enough that it may eventually cause health problems", R.drawable.hbp),
-        new Symptom(200, "Heart rate", "The speed of the heartbeat measured by the number of contractions of the heart per minute", R.drawable.heartbeat),
-        new Symptom(300, "Headache", "The symptom of pain in the face, head, or neck", R.drawable.headache),
-        new Symptom(400, "Tinea Versicolor", "Fungal infection of the skin, caused by a type of yeast that naturally lives on your skin.", R.drawable.tineaversicolor)
+        new Symptom(100, "High blood pressure", "Common condition in which the long-term force of the blood against your artery walls is high enough that it may eventually cause health problems", "hbp"),
+        new Symptom(200, "Heart rate", "The speed of the heartbeat measured by the number of contractions of the heart per minute", "heartbeat"),
+        new Symptom(300, "Headache", "The symptom of pain in the face, head, or neck", "headache"),
+        new Symptom(400, "Tinea Versicolor", "Fungal infection of the skin, caused by a type of yeast that naturally lives on your skin.", "tineaversicolor")
     };
 
     private static final String DB_NAME = "eatlimination";
@@ -66,5 +66,7 @@ public abstract class EatliminationDatabase extends RoomDatabase {
     public abstract DietDao dietDao();
 
     public abstract SymptomDao symptomDao();
+
+    public abstract SymptomRecordDao symptomRecordDao();
 
 }

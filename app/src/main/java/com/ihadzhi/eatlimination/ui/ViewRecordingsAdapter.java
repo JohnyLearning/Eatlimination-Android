@@ -82,16 +82,18 @@ class ViewRecordingsAdapter extends RecyclerView.Adapter<ViewRecordingsAdapter.V
                             dateTime.toString("d MMM, yyyy"),
                             time));
             binding.symptomDescription.setText(description);
-            switch (record.getCategory()) {
-                case green:
-                    binding.symptomCategory.setBackgroundResource(R.drawable.symptom_status_green_background);
-                    break;
-                case yellow:
-                    binding.symptomCategory.setBackgroundResource(R.drawable.symptom_status_yellow_background);
-                    break;
-                case red:
-                    binding.symptomCategory.setBackgroundResource(R.drawable.symptom_status_red_background);
-                    break;
+            if (record.getCategory() != null) {
+                switch (record.getCategory()) {
+                    case green:
+                        binding.symptomCategory.setBackgroundResource(R.drawable.symptom_status_green_background);
+                        break;
+                    case yellow:
+                        binding.symptomCategory.setBackgroundResource(R.drawable.symptom_status_yellow_background);
+                        break;
+                    case red:
+                        binding.symptomCategory.setBackgroundResource(R.drawable.symptom_status_red_background);
+                        break;
+                }
             }
         }
 

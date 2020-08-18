@@ -77,7 +77,7 @@ class SymptomsAdapter extends RecyclerView.Adapter<SymptomsAdapter.SymptomsViewH
 
         void bind(Symptom symptom) {
             binding.setSymptom(symptom);
-            binding.symptomImage.setImageDrawable(context.getResources().getDrawable(symptom.getImageResource(), null));
+            binding.symptomImage.setImageDrawable(symptom.getImage(context));
             itemView.setOnClickListener(this);
             binding.symptomRecordingAction.setOnClickListener(view -> {
                 if (newRecordClickListener != null) {

@@ -42,14 +42,14 @@ public class ViewRecordingsFragment extends BaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         dataBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_recordings, container, false);
-        symptom = SymptomRecordFragmentArgs.fromBundle(getArguments()).getSymptom();
+        symptom = ViewRecordingsFragmentArgs.fromBundle(getArguments()).getSymptom();
         return dataBinding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setTitle(getString(R.string.recordings_title, "High blood pressure"));
+        setTitle(getString(R.string.recordings_title, symptom.getName()));
         setHasOptionsMenu(true);
         showBackButton();
         hideNavigation();
@@ -57,7 +57,8 @@ public class ViewRecordingsFragment extends BaseFragment {
         viewRecordingsAdapter = new ViewRecordingsAdapter(getActivity(), food -> {
             // TODO: define action for food selection
         });
-        viewRecordingsViewModel.getRecordings().observe(getActivity(), records -> {
+        viewRecordingsViewModel.getRecordings(symptom.getId()).removeObservers(getActivity());
+        viewRecordingsViewModel.getRecordings(symptom.getId()).observe(getActivity(), records -> {
             if (records != null && records.size() > 0) {
                 setupRecordsContent(records);
             }
