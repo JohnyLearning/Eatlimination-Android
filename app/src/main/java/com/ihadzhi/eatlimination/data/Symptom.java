@@ -11,7 +11,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class Symptom {
+public class Symptom implements Parcelable {
 
     @PrimaryKey
     @NonNull
@@ -51,4 +51,35 @@ public class Symptom {
         return description;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(this.id);
+        dest.writeString(this.imageName);
+        dest.writeString(this.name);
+        dest.writeString(this.description);
+    }
+
+    protected Symptom(Parcel in) {
+        this.id = in.readLong();
+        this.imageName = in.readString();
+        this.name = in.readString();
+        this.description = in.readString();
+    }
+
+    public static final Parcelable.Creator<Symptom> CREATOR = new Parcelable.Creator<Symptom>() {
+        @Override
+        public Symptom createFromParcel(Parcel source) {
+            return new Symptom(source);
+        }
+
+        @Override
+        public Symptom[] newArray(int size) {
+            return new Symptom[size];
+        }
+    };
 }
