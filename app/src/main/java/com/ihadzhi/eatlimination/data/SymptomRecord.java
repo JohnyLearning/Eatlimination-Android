@@ -8,6 +8,8 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import org.joda.time.DateTime;
+
 import java.util.Date;
 
 @Entity
@@ -49,7 +51,7 @@ public class SymptomRecord implements Parcelable {
     public SymptomRecord(SymptomCategory category, String value, long symptomId) {
         this.category = category;
         this.value = value;
-        this.timestamp = new Date();
+        this.timestamp = new DateTime().toDate();
         this.symptomId = symptomId;
     }
 

@@ -17,8 +17,13 @@ import com.ihadzhi.eatlimination.data.SymptomRecord;
 import com.ihadzhi.eatlimination.databinding.RecordingsItemBinding;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
+import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.concurrent.Executor;
 
 class ViewRecordingsAdapter extends RecyclerView.Adapter<ViewRecordingsAdapter.ViewRecordingsViewHolder> {
@@ -74,13 +79,14 @@ class ViewRecordingsAdapter extends RecyclerView.Adapter<ViewRecordingsAdapter.V
         void bind(SymptomRecord record) {
             binding.setRecord(record);
             itemView.setOnClickListener(this);
-            DateTime dateTime = new DateTime(record.getTimestamp());
-            String time = dateTime.getHourOfDay() + ":" + dateTime.getMinuteOfHour();
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(record.getTimestamp());
+            DateTime dateTime = new DateTime(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1,
+                    calendar.get(Calendar.DAY_OF_MONTH), calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), calendar.get(Calendar.SECOND));
             StringBuilder description =
                     new StringBuilder(context.getString(R.string.symptom_description,
                             record.getValue(),
-                            dateTime.toString("d MMM, yyyy"),
-                            time));
+                            dateTime.toString("d MMM, yyyy @ HH:MM")));
             binding.symptomDescription.setText(description);
             if (record.getCategory() != null) {
                 switch (record.getCategory()) {
