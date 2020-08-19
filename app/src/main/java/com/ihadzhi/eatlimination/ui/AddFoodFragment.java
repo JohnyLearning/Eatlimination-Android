@@ -76,20 +76,10 @@ public class AddFoodFragment extends BaseFragment {
                         foodDao.insert(createFood);
                     });
                 }
+                hideLoadingIndicator();
+                NavHostFragment.findNavController(this).navigate(AddFoodFragmentDirections.backToHomeFragment());
             });
-//            executor.execute(() -> {
-//                if (foodDao.fetchByExternalId(food.getId()).getValue() == null) {
-//                    Food createFood = new Food(new Date(), String.valueOf(food.getId()), food.getImage(), food.getName(), -1);
-//                    foodDao.insert(createFood);
-//                } else {
-//                    // show alert that food already exists
-//                }
-//                hideLoadingIndicator();
-//                NavHostFragment.findNavController(this).navigate(AddFoodFragmentDirections.backToHomeFragment());
-//            });
         });
-        hideLoadingIndicator();
-        NavHostFragment.findNavController(this).navigate(AddFoodFragmentDirections.backToHomeFragment());
     }
 
     @Override

@@ -52,4 +52,8 @@ public class BaseFragment extends Fragment {
     public void hideLoadingIndicator() {
         containerInteractor.hideLoadingIndicator();
     }
+
+    public void hideSoftKeyboard() {
+        containerInteractor.hideSoftKeyboard();
+    }
 }

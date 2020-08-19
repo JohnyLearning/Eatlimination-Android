@@ -87,11 +87,13 @@ public class SymptomRecordFragment extends BaseFragment {
     }
 
     private void createRecord(String newValue) {
+        showLoadingIndicator();
         if (validate(newValue)) {
             final EatliminationDatabase db = EatliminationDatabase.getInstance(getActivity());
             SymptomRecordDao dao = db.symptomRecordDao();
             Executors.newSingleThreadScheduledExecutor().execute(() -> {
                 dao.insert(new SymptomRecord(determinCategory(), newValue, symptom.getId()));
+                hideLoadingIndicator();
                 NavHostFragment.findNavController(this).navigate(SymptomRecordFragmentDirections.backToSymptoms());
             });
         }

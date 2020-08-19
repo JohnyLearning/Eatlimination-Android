@@ -12,6 +12,7 @@ import androidx.navigation.ui.NavigationUI;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ProgressBar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -51,5 +52,11 @@ public class StartActivity extends AppCompatActivity implements ContainerInterac
     @Override
     public void hideLoadingIndicator() {
         progressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void hideSoftKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
     }
 }

@@ -10,4 +10,6 @@ public interface ContainerInteractor {
 
     void hideLoadingIndicator();
 
+    void hideSoftKeyboard();
+
 }

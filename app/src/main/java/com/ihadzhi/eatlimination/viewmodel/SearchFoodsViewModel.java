@@ -26,7 +26,7 @@ public class SearchFoodsViewModel extends BaseViewModel {
         spoonacularService = new SpoonacularService();
     }
 
-    public LiveData<List<SpoonFoodAuto>> findFoods(CharSequence searchFoodsQuery) {
+    public LiveData<List<SpoonFoodAuto>> findFoods(CharSequence searchFoodsQuery) throws Exception {
 //        if (foundFoods == null) {
             foundFoods = new MutableLiveData<>();
             searchFoods(searchFoodsQuery);
@@ -34,7 +34,7 @@ public class SearchFoodsViewModel extends BaseViewModel {
         return foundFoods;
     }
 
-    private void searchFoods(CharSequence searchFoodsQuery) {
+    private void searchFoods(CharSequence searchFoodsQuery) throws Exception {
         foundFoods = new MutableLiveData<>();
         spoonacularService.searchFoods(searchFoodsQuery)
                 .subscribeOn(Schedulers.io())
@@ -42,7 +42,7 @@ public class SearchFoodsViewModel extends BaseViewModel {
                 .subscribe(foundFoodsFromResponse ->
                     foundFoods.setValue(foundFoodsFromResponse),
                         throwable -> {
-                            // TODO: handle error
+                            throw new Exception(throwable);
                         });
     }
 }

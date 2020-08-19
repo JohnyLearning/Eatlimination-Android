@@ -1,10 +1,13 @@
 package com.ihadzhi.eatlimination.ui;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
@@ -36,6 +39,11 @@ public class FoodSearchFragment extends BaseFragment {
     }
 
     @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         showBackButton();
@@ -46,13 +54,23 @@ public class FoodSearchFragment extends BaseFragment {
 
             @Override
             public boolean onQueryTextSubmit(String query) {
-                searchFoodsViewModel.findFoods(query)
-                        .observe(getActivity(), foods -> { if (foods != null && foods.size() > 0) {
-                                foodSearchAdapter.setFoods(foods);
-                            } else {
+                showLoadingIndicator();
+                hideSoftKeyboard();
+                try {
+                    searchFoodsViewModel.findFoods(query)
+                            .observe(getActivity(), foods -> {
+                                if (foods != null && foods.size() > 0) {
+                                    foodSearchAdapter.setFoods(foods);
+                                } else {
 
-                            }
-                        });
+                                }
+                            });
+                } catch (Exception ex) {
+                    // TODO: show error
+                } finally {
+                    dataBinding.searchView.clearFocus();
+                    hideLoadingIndicator();
+                }
                 return true;
             }
 
