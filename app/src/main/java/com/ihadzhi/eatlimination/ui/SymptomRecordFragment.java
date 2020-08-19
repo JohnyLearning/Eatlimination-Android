@@ -37,9 +37,12 @@ import static com.ihadzhi.eatlimination.data.SymptomRecord.SymptomCategory.yello
 
 public class SymptomRecordFragment extends BaseFragment {
 
+    private static final String CATEGORY_PARAM = "selectedCategory";
+
     private SymptomRecordViewModel viewModel;
     private SymptomRecordFragmentBinding dataBinding;
     private Symptom symptom;
+    private SymptomCategory selectedCategory;
 
     public static SymptomRecordFragment newInstance() {
         return new SymptomRecordFragment();
@@ -53,6 +56,14 @@ public class SymptomRecordFragment extends BaseFragment {
         setHasOptionsMenu(true);
         symptom = SymptomRecordFragmentArgs.fromBundle(getArguments()).getSymptom();
         dataBinding.setSymptom(symptom);
+        if (savedInstanceState != null) {
+            int category = savedInstanceState.getInt(CATEGORY_PARAM, -1);
+            if (category >= 0) {
+                selectedCategory = SymptomCategory.values()[category];
+            }
+        } else {
+            selectedCategory = green;
+        }
         return dataBinding.getRoot();
     }
 
@@ -60,6 +71,15 @@ public class SymptomRecordFragment extends BaseFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         viewModel = ViewModelProviders.of(this).get(SymptomRecordViewModel.class);
+    }
+
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        if (selectedCategory != null) {
+            outState.putInt(CATEGORY_PARAM, selectedCategory.ordinal());
+        }
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -73,6 +93,11 @@ public class SymptomRecordFragment extends BaseFragment {
         dataBinding.redStatus.setOnClickListener(v -> changesSymptomStatus(red));
         dataBinding.saveAction.setOnClickListener(v -> {
             createRecord(dataBinding.newValue.getText().toString());
+        });
+        dataBinding.newValue.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                hideSoftKeyboard();
+            }
         });
     }
 
@@ -92,20 +117,10 @@ public class SymptomRecordFragment extends BaseFragment {
             final EatliminationDatabase db = EatliminationDatabase.getInstance(getActivity());
             SymptomRecordDao dao = db.symptomRecordDao();
             Executors.newSingleThreadScheduledExecutor().execute(() -> {
-                dao.insert(new SymptomRecord(determinCategory(), newValue, symptom.getId()));
+                dao.insert(new SymptomRecord(selectedCategory, newValue, symptom.getId()));
                 hideLoadingIndicator();
                 NavHostFragment.findNavController(this).navigate(SymptomRecordFragmentDirections.backToSymptoms());
             });
-        }
-    }
-
-    private SymptomCategory determinCategory() {
-        if (dataBinding.yellowStatus.getBackground() == getDrawable(R.drawable.symptom_status_yellow_background)) {
-            return yellow;
-        } else if (dataBinding.redStatus.getBackground() == getDrawable(R.drawable.symptom_status_red_background)) {
-            return red;
-        } else {
-            return green;
         }
     }
 
@@ -129,6 +144,7 @@ public class SymptomRecordFragment extends BaseFragment {
             default:
                 // no-op
         }
+        selectedCategory = category;
     }
 
     private Drawable getDrawable(@DrawableRes int drawable) {

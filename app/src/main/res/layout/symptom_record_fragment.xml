@@ -87,6 +87,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="24sp"
+            android:maxLines="1"
             app:layout_constraintTop_toBottomOf="@id/symptom_description"
             app:layout_constraintStart_toEndOf="@id/new_value_title"
             android:layout_marginEnd="48dp"

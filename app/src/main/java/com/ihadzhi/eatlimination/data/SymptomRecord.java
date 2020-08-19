@@ -17,8 +17,8 @@ public class SymptomRecord implements Parcelable {
         green, yellow, red
     }
 
-    @PrimaryKey
     @NonNull
+    @PrimaryKey (autoGenerate = true)
     private long id;
 
     private SymptomCategory category;

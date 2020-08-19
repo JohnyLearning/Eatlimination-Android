@@ -20,7 +20,7 @@ public class Converters {
 
     @TypeConverter
     public static SymptomCategory fromInt(int index) {
-        return index >= 0 && index < SymptomCategory.values().length ? null : SymptomCategory.values()[index];
+        return index >= 0 && index < SymptomCategory.values().length ? SymptomCategory.values()[index] : null;
     }
 
     @TypeConverter
