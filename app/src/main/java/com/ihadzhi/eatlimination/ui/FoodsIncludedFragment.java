@@ -47,11 +47,15 @@ public class FoodsIncludedFragment extends BaseFragment {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
         setTitle(R.string.foods_included_title);
-        foodsIncludedAdapter = new FoodsIncludedAdapter(getActivity(), food -> {
+        foodsIncludedAdapter = new FoodsIncludedAdapter(getActivity(),
+            food -> {
             // TODO: define action for food selection
-        });
+            }, (food, index) -> {
+                foodsIncludedViewModel.removeFoodFromDiet(food);
+            });
         int numberOfItemsPerRow = (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) ? 5 : 3;
         LinearLayoutManager layoutManager = new GridLayoutManager(getActivity(), numberOfItemsPerRow);
+        dataBinding.foodsIncludedList.setLayoutManager(layoutManager);
         dataBinding.foodsIncludedList.setLayoutManager(layoutManager);
         dataBinding.foodsIncludedList.setAdapter(foodsIncludedAdapter);
         foodsIncludedViewModel = ViewModelProviders.of(this).get(FoodsIncludedViewModel.class);

@@ -100,7 +100,6 @@ class HomeFoodAdapter extends RecyclerView.Adapter<HomeFoodAdapter.HomeFoodViewH
         }
 
         private void addToDiet(Food food) {
-//            dietDao.fetchActiveDiet().removeObservers((LifecycleOwner) context);
             dietDao.fetchActiveDiet().observe((LifecycleOwner) context, activeDiet -> {
                 executor = Executors.newFixedThreadPool(1);
                 if (activeDiet != null) {

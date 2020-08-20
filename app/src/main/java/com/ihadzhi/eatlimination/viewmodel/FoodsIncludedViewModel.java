@@ -14,6 +14,7 @@ import com.ihadzhi.eatlimination.data.EatliminationDatabase;
 import com.ihadzhi.eatlimination.data.Food;
 
 import java.util.List;
+import java.util.concurrent.Executors;
 
 public class FoodsIncludedViewModel extends BaseViewModel {
 
@@ -38,5 +39,11 @@ public class FoodsIncludedViewModel extends BaseViewModel {
             foods = database.foodDao().fetchByDietId(dietId);
         };
         return foods;
+    }
+
+    public void removeFoodFromDiet(Food food) {
+        food.setDietId(-1);
+        Executors.newSingleThreadScheduledExecutor().execute(() -> database.foodDao().updateFood(food));
+
     }
 }

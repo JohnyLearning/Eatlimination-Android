@@ -30,13 +30,20 @@ class FoodsIncludedAdapter extends RecyclerView.Adapter<FoodsIncludedAdapter.Foo
         void execute(Food food);
     }
 
+    @FunctionalInterface
+    public interface RemoveFromDietListener {
+        void remove(Food food, int itemPosition);
+    }
+
     private final Context context;
     private List<Food> foods;
     private FoodClickListener foodClickListener;
+    private RemoveFromDietListener removeFromDietListener;
 
-    public FoodsIncludedAdapter(Context context, FoodClickListener foodClickListener) {
+    public FoodsIncludedAdapter(Context context, FoodClickListener foodClickListener, RemoveFromDietListener removeFromDietListener) {
         this.context = context;
         this.foodClickListener = foodClickListener;
+        this.removeFromDietListener = removeFromDietListener;
     }
 
     @NonNull
@@ -63,6 +70,11 @@ class FoodsIncludedAdapter extends RecyclerView.Adapter<FoodsIncludedAdapter.Foo
         return foods != null ? foods.size() : 0;
     }
 
+    public void removeItem(int position) {
+        foods.remove(position);
+        notifyDataSetChanged();
+    }
+
     class FoodsIncludedViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         FoodsIncludedItemBinding binding;
@@ -80,6 +92,18 @@ class FoodsIncludedAdapter extends RecyclerView.Adapter<FoodsIncludedAdapter.Foo
                     .into(binding.foodImage);
             itemView.setOnClickListener(this);
             binding.foodName.setText(food.getTitle());
+            itemView.setOnLongClickListener(v -> {
+                if (removeFromDietListener != null) {
+                    binding.foodRemove.setVisibility(View.VISIBLE);
+                    binding.foodRemove.setOnClickListener(view -> {
+                        removeFromDietListener.remove(food, getAdapterPosition());
+                        foods.remove(food);
+                        notifyDataSetChanged();
+                    });
+                }
+                return true;
+            });
+            binding.foodRemove.setVisibility(View.GONE);
         }
 
         @Override
