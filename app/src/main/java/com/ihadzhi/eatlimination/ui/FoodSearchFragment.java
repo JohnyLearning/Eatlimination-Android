@@ -66,7 +66,7 @@ public class FoodSearchFragment extends BaseFragment {
                                 }
                             });
                 } catch (Exception ex) {
-                    // TODO: show error
+                    showGenericError();
                 } finally {
                     dataBinding.searchView.clearFocus();
                     hideLoadingIndicator();

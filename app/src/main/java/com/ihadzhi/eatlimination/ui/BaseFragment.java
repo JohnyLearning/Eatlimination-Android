@@ -56,4 +56,12 @@ public class BaseFragment extends Fragment {
     public void hideSoftKeyboard() {
         containerInteractor.hideSoftKeyboard();
     }
+
+    public void showGenericError() {
+        containerInteractor.errorGeneric();
+    }
+
+    public void showError(@StringRes int errorMessage) {
+        containerInteractor.error(errorMessage);
+    }
 }

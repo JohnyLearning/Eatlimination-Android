@@ -50,7 +50,7 @@ public class HomeFragment extends BaseFragment {
         hideNavigation();
         homeViewModel = ViewModelProviders.of(getActivity()).get(HomeViewModel.class);
         homeFoodAdapter = new HomeFoodAdapter(getActivity(), food -> {
-            // TODO: define action for food selection
+            // no-op
         });
         homeViewModel.getFoods().removeObservers(getActivity());
         homeViewModel.getFoods().observe(getActivity(), foods -> {

@@ -1,5 +1,7 @@
 package com.ihadzhi.eatlimination.ui;
 
+import androidx.annotation.StringRes;
+
 public interface ContainerInteractor {
 
     void hideBottomNavigation();
@@ -11,5 +13,9 @@ public interface ContainerInteractor {
     void hideLoadingIndicator();
 
     void hideSoftKeyboard();
+
+    void errorGeneric();
+
+    void error(@StringRes int errorMessage);
 
 }

@@ -49,7 +49,7 @@ public class FoodsIncludedFragment extends BaseFragment {
         setTitle(R.string.foods_included_title);
         foodsIncludedAdapter = new FoodsIncludedAdapter(getActivity(),
             food -> {
-            // TODO: define action for food selection
+                // no-op
             }, (food, index) -> {
                 foodsIncludedViewModel.removeFoodFromDiet(food);
             });

@@ -2,7 +2,6 @@
     <string name="app_name">Eatlimination</string>
     <string name="add_foods_text">Add foods so that you can start your elimination diet.</string>
     <string name="search_foods_hint">Enter food name</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_food_button_title">Add food</string>
     <string name="diet_button_title">Diet</string>
@@ -17,4 +16,7 @@
     <string name="home_title">"Your foods"</string>
     <string name="add_food_title">"Add %1$s to your foods"</string>
     <string name="new_value_label">New value:</string>
+    <string name="ok_button">OK</string>
+    <string name="generic_error">Something went wrong!</string>
+    <string name="value_empty">Value cannot be empty</string>
 </resources>

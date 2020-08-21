@@ -55,7 +55,7 @@ public class ViewRecordingsFragment extends BaseFragment {
         hideNavigation();
         viewRecordingsViewModel = ViewModelProviders.of(getActivity()).get(ViewRecordingsViewModel.class);
         viewRecordingsAdapter = new ViewRecordingsAdapter(getActivity(), food -> {
-            // TODO: define action for food selection
+            // no-op
         });
         viewRecordingsViewModel.getRecordings(symptom.getId()).removeObservers(getActivity());
         viewRecordingsViewModel.getRecordings(symptom.getId()).observe(getActivity(), records -> {

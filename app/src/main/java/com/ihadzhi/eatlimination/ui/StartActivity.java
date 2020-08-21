@@ -1,5 +1,6 @@
 package com.ihadzhi.eatlimination.ui;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -10,6 +11,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -58,5 +60,21 @@ public class StartActivity extends AppCompatActivity implements ContainerInterac
     public void hideSoftKeyboard() {
         InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
+    }
+
+    @Override
+    public void errorGeneric() {
+        error(R.string.generic_error);
+    }
+
+    @Override
+    public void error(int errorMessage) {
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setMessage(getString(errorMessage));
+        alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.ok_button), (dialog, which) -> {
+            alertDialog.dismiss();
+        });
+        alertDialog.setCanceledOnTouchOutside(true);
+        alertDialog.show();
     }
 }
