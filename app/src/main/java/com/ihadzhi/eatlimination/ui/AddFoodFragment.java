@@ -23,13 +23,13 @@ import com.squareup.picasso.Picasso;
 
 import java.util.Date;
 import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class AddFoodFragment extends BaseFragment {
 
     private SpoonFoodAuto food;
     private FragmentAddFoodBinding binding;
-    private Executor executor;
 
     public AddFoodFragment() {
         // Required empty public constructor
@@ -56,7 +56,6 @@ public class AddFoodFragment extends BaseFragment {
         Picasso.get()
                 .load("https://spoonacular.com/cdn/ingredients_500x500/" + food.getImage())
                 .into(binding.foodImage);
-        executor = Executors.newFixedThreadPool(1);
     }
 
     private void addFoodAction() {
@@ -64,20 +63,20 @@ public class AddFoodFragment extends BaseFragment {
         FoodDao foodDao = EatliminationDatabase.getInstance(getActivity()).foodDao();
         DietDao dietDao = EatliminationDatabase.getInstance(getActivity()).dietDao();
         showLoadingIndicator();
-        dietDao.fetchActiveDiet().removeObservers(getActivity());
-        foodDao.fetchByExternalId(food.getId()).removeObservers(getActivity());
         dietDao.fetchActiveDiet().observe(getActivity(), activeDiet -> {
             foodDao.fetchByExternalId(food.getId()).observe(getActivity(), foundFoods -> {
                 if (foundFoods != null && foundFoods.size() > 0) {
                     // show alert that food already exists
                 } else {
-                    executor.execute(() -> {
+                    Executors.newSingleThreadScheduledExecutor().execute(() -> {
                         Food createFood = new Food(new Date(), String.valueOf(food.getId()), food.getImage(), food.getName(), -1);
                         foodDao.insert(createFood);
                     });
+                    if (NavHostFragment.findNavController(this).getCurrentDestination().getLabel().equals("addFoodFragment")) {
+                        hideLoadingIndicator();
+                        NavHostFragment.findNavController(this).navigate(AddFoodFragmentDirections.actionAddFoodFragmentToHomeFragment());
+                    }
                 }
-                hideLoadingIndicator();
-                NavHostFragment.findNavController(this).navigate(AddFoodFragmentDirections.backToHomeFragment());
             });
         });
     }

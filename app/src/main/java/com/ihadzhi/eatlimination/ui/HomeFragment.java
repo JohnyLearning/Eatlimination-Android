@@ -48,7 +48,6 @@ public class HomeFragment extends BaseFragment {
         setTitle(R.string.home_title);
         hideBackButton();
         hideNavigation();
-        setHasOptionsMenu(true);
         homeViewModel = ViewModelProviders.of(getActivity()).get(HomeViewModel.class);
         homeFoodAdapter = new HomeFoodAdapter(getActivity(), food -> {
             // TODO: define action for food selection
@@ -62,11 +61,15 @@ public class HomeFragment extends BaseFragment {
             }
         });
         ((SimpleItemAnimator)dataBinding.foodsList.getItemAnimator()).setSupportsChangeAnimations(false);
+        setHasOptionsMenu(true);
     }
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
+        homeViewModel.getActiveFoodsCount().observe(getActivity(), count -> {
+            menu.setGroupVisible(R.id.diet_group, count > 0);
+        });
         inflater.inflate(R.menu.home_food_menu, menu);
     }
 
@@ -74,10 +77,10 @@ public class HomeFragment extends BaseFragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         switch (id) {
-            case R.id.add_food_action:
+            case R.id.add_food_action_menu:
                 addFoodsAction();
                 break;
-            case R.id.diet_action:
+            case R.id.diet_action_menu:
                 dietAction();
                 break;
         }
@@ -85,7 +88,9 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void addFoodsAction() {
-        NavHostFragment.findNavController(this).navigate(HomeFragmentDirections.actionHomeFragmentToFoodSearchFragment());
+//        if (NavHostFragment.findNavController(this).getCurrentDestination().getLabel().equals("homeFragment")) {
+            NavHostFragment.findNavController(this).navigate(HomeFragmentDirections.actionHomeFragmentToFoodSearchFragment());
+//        }
     }
 
     private void setupFoodListContent(@NotNull List<Food> foods) {
@@ -112,6 +117,8 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void dietAction() {
-        NavHostFragment.findNavController(this).navigate(HomeFragmentDirections.actionHomeFragmentToFoodsIncludedFragment());
+//        if (NavHostFragment.findNavController(this).getCurrentDestination().getLabel().equals("homeFragment")) {
+            NavHostFragment.findNavController(this).navigate(HomeFragmentDirections.actionHomeFragmentToFoodsIncludedFragment());
+//        }
     }
 }

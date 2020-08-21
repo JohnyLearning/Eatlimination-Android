@@ -80,7 +80,10 @@ public class FoodsIncludedFragment extends BaseFragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            NavHostFragment.findNavController(this).navigate(FoodsIncludedFragmentDirections.backToHomeFragment());
+//            if (NavHostFragment.findNavController(this).getCurrentDestination().getLabel() != null &&
+//                    NavHostFragment.findNavController(this).getCurrentDestination().getLabel().equals("foodIncludedFragment")) {
+                NavHostFragment.findNavController(this).navigate(FoodsIncludedFragmentDirections.foodsIncludedToHomeFragment());
+//            }
         }
         return true;
     }

@@ -22,6 +22,9 @@ public interface FoodDao {
     @Query("SELECT * FROM Food WHERE externalId = :externalId ORDER BY createdAt DESC")
     LiveData<List<Food>> fetchByExternalId(long externalId);
 
+    @Query("SELECT COUNT(id) FROM Food WHERE dietId > -1")
+    LiveData<Integer> getActiveFoodsCount();
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insert(Food food);
 

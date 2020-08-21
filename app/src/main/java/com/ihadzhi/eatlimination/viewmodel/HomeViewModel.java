@@ -24,7 +24,7 @@ import io.reactivex.schedulers.Schedulers;
 public class HomeViewModel extends BaseViewModel {
 
     private LiveData<List<Food>> foods;
-    private LiveData<Diet> activeDiet;
+    private LiveData<Integer> activeFoodsCount;
     private Executor executor;
 
     public HomeViewModel(@NonNull Application application) {
@@ -38,5 +38,10 @@ public class HomeViewModel extends BaseViewModel {
             foods = database.foodDao().getAll();
         }
         return foods;
+    }
+
+    public LiveData<Integer> getActiveFoodsCount() {
+        activeFoodsCount = database.foodDao().getActiveFoodsCount();
+        return activeFoodsCount;
     }
 }
