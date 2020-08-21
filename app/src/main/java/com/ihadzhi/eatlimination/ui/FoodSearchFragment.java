@@ -62,7 +62,7 @@ public class FoodSearchFragment extends BaseFragment {
                                 if (foods != null && foods.size() > 0) {
                                     foodSearchAdapter.setFoods(foods);
                                 } else {
-
+                                    showError(R.string.no_foods_found);
                                 }
                             });
                 } catch (Exception ex) {

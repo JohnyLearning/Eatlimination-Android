@@ -106,6 +106,7 @@ public class SymptomRecordFragment extends BaseFragment {
         if (!TextUtils.isEmpty(recordValue)) {
             return true;
         } else {
+            hideLoadingIndicator();
             showError(R.string.value_empty);
             return false;
         }

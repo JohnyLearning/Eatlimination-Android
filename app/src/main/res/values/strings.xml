@@ -19,4 +19,5 @@
     <string name="ok_button">OK</string>
     <string name="generic_error">Something went wrong!</string>
     <string name="value_empty">Value cannot be empty</string>
+    <string name="no_foods_found">Didn\'t find any foods for the specified criteria.</string>
 </resources>
