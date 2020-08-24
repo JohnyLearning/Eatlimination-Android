@@ -9,8 +9,6 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.ihadzhi.eatlimination.R;
-
 import java.util.Date;
 import java.util.concurrent.Executors;
 
@@ -19,10 +17,12 @@ import java.util.concurrent.Executors;
 public abstract class EatliminationDatabase extends RoomDatabase {
 
     private static final Symptom[] symptoms = new Symptom[] {
-        new Symptom(100, "High blood pressure", "Common condition in which the long-term force of the blood against your artery walls is high enough that it may eventually cause health problems", "hbp"),
-        new Symptom(200, "Heart rate", "The speed of the heartbeat measured by the number of contractions of the heart per minute", "heartbeat"),
-        new Symptom(300, "Headache", "The symptom of pain in the face, head, or neck", "headache"),
-        new Symptom(400, "Tinea Versicolor", "Fungal infection of the skin, caused by a type of yeast that naturally lives on your skin.", "tineaversicolor")
+            new Symptom(100, "High blood pressure", "Common condition in which the long-term force of the blood against your artery walls is high enough that it may eventually cause health problems", "hbp"),
+            new Symptom(200, "Heart rate", "The speed of the heartbeat measured by the number of contractions of the heart per minute", "heartbeat"),
+            new Symptom(300, "Headache", "The symptom of pain in the face, head, or neck", "headache"),
+            new Symptom(400, "Tinea Versicolor", "Fungal infection of the skin, caused by a type of yeast that naturally lives on your skin.", "tineaversicolor"),
+            new Symptom(500, "Heartburn", "Heartburn is a burning pain in your chest, just behind your breastbone. The pain is often worse after eating, in the evening, or when lying down or bending over.", "NO-IMAGE"),
+            new Symptom(600, "Weight changes", "Changes in the weight during a diet can show specific tollerance for foods being introduced.", "NO-IMAGE")
     };
 
     private static final String DB_NAME = "eatlimination";
