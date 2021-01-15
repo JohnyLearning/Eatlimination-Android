@@ -16,7 +16,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.activity_start.*
 
-class StartActivity : AppCompatActivity(), ContainerInteractor {
+open class StartActivity : AppCompatActivity(), ContainerInteractor {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
