@@ -10,10 +10,8 @@ class ViewRecordingsViewModel(application: Application) : BaseViewModel(applicat
     private var recordings: LiveData<List<SymptomRecord>>? = null
 
     fun getRecordings(symptomId: Long): LiveData<List<SymptomRecord>>? {
-//        if (recordings == null) {
         recordings = MutableLiveData()
         recordings = database.symptomRecordDao().fetchBySymptomId(symptomId)
-        //        }
         return recordings
     }
 
