@@ -6,7 +6,7 @@ import androidx.room.*
 @Dao
 interface DietDao {
     @Query("SELECT * FROM Diet WHERE active > 0 ORDER BY createdAt DESC")
-    fun fetchActiveDiet(): LiveData<Diet?>?
+    fun fetchActiveDiet(): LiveData<Diet>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(diet: Diet?): Long

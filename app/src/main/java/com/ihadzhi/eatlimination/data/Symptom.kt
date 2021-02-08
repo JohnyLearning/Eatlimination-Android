@@ -9,18 +9,14 @@ import kotlinx.android.parcel.Parcelize
 
 @Entity
 @Parcelize
-class Symptom : Parcelable {
+class Symptom() : Parcelable {
     @PrimaryKey
-    var id: Long
-        private set
-    var imageName: String?
-        private set
-    var name: String?
-        private set
-    var description: String?
-        private set
+    var id: Long = 1
+    var imageName: String? = null
+    var name: String? = null
+    var description: String? = null
 
-    constructor(id: Long, name: String?, description: String?, imageName: String?) {
+    constructor(id: Long, name: String?, description: String?, imageName: String?): this() {
         this.id = id
         this.imageName = imageName
         this.name = name

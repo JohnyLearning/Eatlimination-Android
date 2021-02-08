@@ -18,7 +18,6 @@ class FoodsIncludedViewModel(application: Application) : BaseViewModel(applicati
             }
             return field
         }
-        private set
 
     fun getFoods(dietId: Long): LiveData<List<Food>>? {
         if (foods == null) {

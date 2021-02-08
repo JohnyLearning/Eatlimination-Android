@@ -10,21 +10,16 @@ import java.util.*
 
 @Entity
 @Parcelize
-class Food : Parcelable {
+class Food() : Parcelable {
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
-        private set
-    var createdAt: Date?
-        private set
-    var externalId: String?
-        private set
-    var imageUrl: String?
-        private set
-    var title: String?
-        private set
-    var dietId: Long
+    var createdAt: Date? = null
+    var externalId: String? = null
+    var imageUrl: String? = null
+    var title: String? = null
+    var dietId: Long = -1
 
-    constructor(id: Long, createdAt: Date?, externalId: String?, imageUrl: String?, title: String?, dietId: Long) {
+    constructor(id: Long, createdAt: Date?, externalId: String?, imageUrl: String?, title: String?, dietId: Long) : this() {
         this.id = id
         this.createdAt = createdAt
         this.externalId = externalId
@@ -34,7 +29,7 @@ class Food : Parcelable {
     }
 
     @Ignore
-    constructor(createdAt: Date?, externalId: String?, imageUrl: String?, title: String?, dietId: Long) {
+    constructor(createdAt: Date?, externalId: String?, imageUrl: String?, title: String?, dietId: Long): this() {
         this.createdAt = createdAt
         this.externalId = externalId
         this.imageUrl = imageUrl

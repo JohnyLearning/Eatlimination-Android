@@ -11,24 +11,19 @@ import java.util.*
 
 @Entity
 @Parcelize
-class SymptomRecord : Parcelable {
+class SymptomRecord() : Parcelable {
     enum class SymptomCategory {
-        green, yellow, red
+        green, yellow, red, unknown
     }
 
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
-        private set
-    var category: SymptomCategory?
-        private set
-    var value: String?
-        private set
-    var timestamp: Date?
-        private set
-    var symptomId: Long
-        private set
+    var category: SymptomCategory? = SymptomCategory.unknown
+    var value: String? = null
+    var timestamp: Date? = null
+    var symptomId: Long = -1
 
-    constructor(id: Long, category: SymptomCategory?, value: String?, timestamp: Date?, symptomId: Long) {
+    constructor(id: Long, category: SymptomCategory?, value: String?, timestamp: Date?, symptomId: Long): this() {
         this.id = id
         this.category = category
         this.value = value
@@ -37,7 +32,7 @@ class SymptomRecord : Parcelable {
     }
 
     @Ignore
-    constructor(category: SymptomCategory?, value: String?, timestamp: Date?, symptomId: Long) {
+    constructor(category: SymptomCategory?, value: String?, timestamp: Date?, symptomId: Long): this() {
         this.category = category
         this.value = value
         this.timestamp = timestamp
@@ -45,7 +40,7 @@ class SymptomRecord : Parcelable {
     }
 
     @Ignore
-    constructor(category: SymptomCategory?, value: String?, symptomId: Long) {
+    constructor(category: SymptomCategory?, value: String?, symptomId: Long): this() {
         this.category = category
         this.value = value
         timestamp = DateTime().toDate()

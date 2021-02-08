@@ -46,7 +46,7 @@ class AddFoodFragment : BaseFragment() {
         val dietDao = EatliminationDatabase.getInstance(activity).dietDao()
         showLoadingIndicator()
         dietDao.fetchActiveDiet().observe(requireActivity(), Observer { activeDiet: Diet? ->
-            foodDao.fetchByExternalId(food.id.toLong()).observe(requireActivity(), Observer { foundFoods: List<Food?>? ->
+            foodDao.fetchByExternalId(food.id.toLong())?.observe(requireActivity(), Observer { foundFoods: List<Food?>? ->
                 if (foundFoods != null && foundFoods.isNotEmpty()) {
                     // show alert that food already exists
                 } else {

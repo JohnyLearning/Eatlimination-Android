@@ -49,7 +49,7 @@ internal class HomeFoodAdapter(private val context: Context, private val foodCli
                     .load("https://spoonacular.com/cdn/ingredients_100x100/" + food.imageUrl)
                     .into(binding.foodImage)
             itemView.setOnClickListener(this)
-            if (food.dietId >= 0) {
+            if (food.dietId!! >= 0) {
                 binding.addToDietAction.visibility = View.INVISIBLE
             } else {
                 binding.addToDietAction.visibility = View.VISIBLE

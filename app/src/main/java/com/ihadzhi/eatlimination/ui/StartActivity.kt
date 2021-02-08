@@ -1,15 +1,10 @@
 package com.ihadzhi.eatlimination.ui
 
 import androidx.appcompat.app.AppCompatActivity
-import com.ihadzhi.eatlimination.ui.ContainerInteractor
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import android.widget.ProgressBar
 import android.os.Bundle
 import com.ihadzhi.eatlimination.R
-import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
-import android.app.Activity
 import android.content.DialogInterface
 import android.view.View
 import android.view.inputmethod.InputMethodManager

@@ -9,7 +9,7 @@ interface SymptomRecordDao {
     val all: LiveData<List<SymptomRecord?>?>?
 
     @Query("SELECT * FROM SymptomRecord WHERE symptomId = :symptomId ORDER BY timestamp DESC")
-    fun fetchBySymptomId(symptomId: Long): LiveData<List<SymptomRecord?>?>?
+    fun fetchBySymptomId(symptomId: Long): LiveData<List<SymptomRecord>>?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(symptomRecord: SymptomRecord?): Long
